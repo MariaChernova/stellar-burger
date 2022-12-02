@@ -9,8 +9,10 @@ export default function App() {
   return (
     <div>
       <AppHeader  />
-      {/* <BurgerIngredients />
-      <BurgerConstructor /> */}
+      <main className={appStyles.main}>
+        <BurgerIngredients />
+        {/* <BurgerConstructor />  */}
+      </main>
     </div>
   )
 }
