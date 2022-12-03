@@ -1,0 +1,14 @@
+.image {
+  align-self: center;
+}
+
+.items {
+  display: flex;
+  flex-direction: row;
+}
+
+
+.block {
+  display: flex;
+  flex-direction: row;
+}
