@@ -6,6 +6,12 @@ import Item from '../item/item.js'
 
 
 export default function BurgerIngredients(props) {
+  const {counter, setCount} = React.useState;
+  
+  React.useEffect(() => {
+    setCount = !counter;
+  }, []);
+
   return (
     <div className={`${burgerIngredientsStyles.container} mr-5 mt-5`}>
       <h1 className={'text text_type_main-large mt-5 mb-5'}>Соберите бургер</h1>
