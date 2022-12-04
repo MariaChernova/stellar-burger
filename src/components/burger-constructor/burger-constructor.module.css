@@ -1,3 +1,12 @@
+.container {
+  width: 600px;
+}
+
+.positions {
+  display: flex;
+  flex-direction: column;
+}
+
 .sum {
   display: flex;
   flex-direction: row;
