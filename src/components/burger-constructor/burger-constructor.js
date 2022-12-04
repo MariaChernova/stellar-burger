@@ -6,12 +6,16 @@ import { Typography, Box, Tab, CurrencyIcon, Button } from '@ya.praktikum/react-
 
 export default function BurgerConstructor (props) {
   return (
-    <div>
-      <Position />
+    <div className={burgerConstructorStyles.container}>
+      <div className={burgerConstructorStyles.positions}>
+        <Position />
+        <Position />
+        <Position />
+      </div>
       <div className={`${burgerConstructorStyles.sum} mt-5`}>
         <p className={'text text_type_main-large mr-2'}>650</p>
-        <CurrencyIcon type="primary" className={'mr-5'} />
-        <Button htmlType="button" type="primary" size="large">Оформить заказ</Button>
+        <CurrencyIcon type="primary"/>
+        <Button extraClass={'ml-5'} htmlType="button" type="primary" size="large">Оформить заказ</Button>
       </div>
     </div>
   )
