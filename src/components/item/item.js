@@ -4,7 +4,7 @@ import itemStyles from './item.module.css';
 
 export default function Item(props) {
   return(
-    <div className={itemStyles.block}>
+    <div className={`${itemStyles.block} mb-8`}>
       <Counter count={props.count} size="default" extraClass="m-1" />
       <img src={props.imageSrc} alt='Image' className={itemStyles.image} />
       <div className={`${itemStyles.priceBlock} mt-1 mb-1`}>
