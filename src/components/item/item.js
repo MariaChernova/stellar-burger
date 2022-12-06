@@ -7,7 +7,7 @@ export default function Item(props) {
     <div className={itemStyles.block}>
       <Counter count={props.count} size="default" extraClass="m-1" />
       <img src={props.imageSrc} alt='Image' className={itemStyles.image} />
-      <div className={itemStyles.priceBlock}>
+      <div className={`${itemStyles.priceBlock} mt-1 mb-1`}>
         <p className={'text text_type_digits-default mr-2'}>{props.price}</p>
         <CurrencyIcon type="primary" />
       </div>
