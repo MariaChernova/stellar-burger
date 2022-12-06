@@ -4,15 +4,14 @@ import { Typography, Box, Tab, DragIcon, ConstructorElement } from '@ya.praktiku
 
 export default function Position(props) {
   return (
-    <div className={`${positionStyles.item} mb-4`}>
-      <DragIcon type="primary" />
+    <div className={`${positionStyles.item} ml-4 mb-4`}>
+      <div className={'mr-2'}><DragIcon type="primary" /></div>
       <ConstructorElement
         type={props.type}
         isLocked={props.isLocked}
         text={props.text}
         price={props.price}
-        // thumbnail={img}
-
+        thumbnail={props.thumbnail}
       />
     </div>
   )
