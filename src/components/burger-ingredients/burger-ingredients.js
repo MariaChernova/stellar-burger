@@ -22,30 +22,33 @@ export default function BurgerIngredients(props) {
           Начинки
         </Tab>
       </div>
-      <div>
-        <h2 className={'text text_type_main-medium mt-2 mb-6'}>Булки</h2>
-        <div className={`${burgerIngredientsStyles.block} mt-1 ml-4 mr-4`}>
-          {props.data.filter(obj => obj.type === 'bun').map((obj) => (
-            <Item key={obj.id} imageSrc={obj.image} price={obj.price} name={obj.name} />
-          ))}
+      <div className={burgerIngredientsStyles.ingredients}>
+        <div>
+          <h2 className={'text text_type_main-medium mt-2 mb-6'}>Булки</h2>
+          <div className={`${burgerIngredientsStyles.block} mt-1 ml-4 mr-4`}>
+            {props.data.filter(obj => obj.type === 'bun').map((obj) => (
+              <Item key={obj.id} imageSrc={obj.image} price={obj.price} name={obj.name} />
+            ))}
+          </div>
+        </div>
+        <div>
+          <h2 className={'text text_type_main-medium mt-2 mb-6'}>Соусы</h2>
+          <div className={burgerIngredientsStyles.block}>
+            {props.data.filter(obj => obj.type === 'sauce').map((obj) => (
+              <Item key={obj.id} imageSrc={obj.image} price={obj.price} name={obj.name} />
+            ))}
+          </div>
+        </div>
+        <div>
+          <h2 className={'text text_type_main-medium mt-2 mb-6'}>Начинки</h2>
+          <div className={burgerIngredientsStyles.block}>
+            {props.data.filter(obj => obj.type === 'main').map((obj) => (
+              <Item key={obj.id} imageSrc={obj.image} price={obj.price} name={obj.name} />
+            ))}
+          </div>
         </div>
       </div>
-      <div className={burgerIngredientsStyles.items}>
-        <h2 className={'text text_type_main-medium mt-2 mb-6'}>Соусы</h2>
-        <div className={burgerIngredientsStyles.block}>
-          {props.data.filter(obj => obj.type === 'sauce').map((obj) => (
-            <Item key={obj.id} imageSrc={obj.image} price={obj.price} name={obj.name} />
-          ))}
-        </div>
-      </div>
-      <div className={burgerIngredientsStyles.items}>
-        <h2 className={'text text_type_main-medium mt-2 mb-6'}>Начинки</h2>
-        <div className={burgerIngredientsStyles.block}>
-          {props.data.filter(obj => obj.type === 'main').map((obj) => (
-            <Item key={obj.id} imageSrc={obj.image} price={obj.price} name={obj.name} />
-          ))}
-        </div>
-      </div>
+      
     </div>
   )
 }
