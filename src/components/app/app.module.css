@@ -3,6 +3,8 @@
   flex-direction: row;
   max-width: 1240px;
   align-content: space-between;
-  margin: auto;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  overflow: hidden;
 }
 
