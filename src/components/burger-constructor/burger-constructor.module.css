@@ -9,6 +9,18 @@
 .positions {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 65vh;
+}
+
+.positions::-webkit-scrollbar {
+  width: 8px;
+  background-color: #2F2F37;
+}
+ 
+.positions::-webkit-scrollbar-thumb {
+  background: #8585AD; 
 }
 
 .sum {
