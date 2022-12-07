@@ -1,7 +1,5 @@
 .container {
   width: 600px;
-  height: 75vh;
-  overflow: hidden;
 }
 
 
@@ -14,4 +12,11 @@
 .tabs {
   display: flex;
   flex-direction: row;
+}
+
+.ingredients {
+  max-height: 65vh;
+  overflow: hidden;
+  overflow-y: scroll;
+  scrollbar-width: 10px;
 }
