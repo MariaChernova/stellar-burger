@@ -9,9 +9,9 @@
 .positions {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   overflow-y: scroll;
-  height: 65vh;
+  height: 63vh;
+  /* height: 65vh; */
 }
 
 .positions::-webkit-scrollbar {
