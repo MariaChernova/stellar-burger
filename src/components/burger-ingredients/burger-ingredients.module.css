@@ -15,8 +15,7 @@
 }
 
 .ingredients {
-  height: 65vh;
-  overflow: hidden;
+  height: 63vh;
   overflow-y: scroll;
 }
 

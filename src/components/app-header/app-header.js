@@ -5,7 +5,7 @@ import { Logo, BurgerIcon, ListIcon, ProfileIcon, Typography, Box } from '@ya.pr
 
 export default function AppHeader() {
   return (
-    <div className={appHeaderStyles.bg}>
+    <header className={appHeaderStyles.bg}>
       <nav className={appHeaderStyles.nav}>
         <ul className={appHeaderStyles.ul}>
           <li className={`${appHeaderStyles.button} pl-5 pr-5 pb-4 pt-4`}>
@@ -25,6 +25,6 @@ export default function AppHeader() {
           </li>
         </ul>
       </nav>
-    </div>
+    </header>
   )
 }
