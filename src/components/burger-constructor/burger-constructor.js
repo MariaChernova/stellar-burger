@@ -17,7 +17,7 @@ export default function BurgerConstructor (props) {
         <Position type={'undefined'} isLocked={false} text={props.data[8].name} price={props.data[8].price} thumbnail={props.data[8].image} />
         <Position type={'bottom'} isLocked={true} text={props.data[0].name} price={props.data[0].price} thumbnail={props.data[0].image} />
       </div>
-      <div className={`${burgerConstructorStyles.sum} mt-5`}>
+      <div className={`${burgerConstructorStyles.sum} mt-5`}>  
         <p className={'text text_type_main-large mr-2'}>650</p>
         <CurrencyIcon type="primary" />
         <Button extraClass={'ml-10'} htmlType="button" type="primary" size="large">Оформить заказ</Button>

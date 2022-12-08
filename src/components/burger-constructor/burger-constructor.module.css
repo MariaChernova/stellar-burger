@@ -31,3 +31,8 @@
   bottom: 0;
   right: 16px;
 }
+
+.sum svg {
+  width: 32px;
+  height: 32px;
+}
