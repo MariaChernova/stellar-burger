@@ -11,9 +11,9 @@ export default function Position(props) {
       <ConstructorElement
         type={props.type}
         isLocked={props.isLocked}
-        text={props.text}
-        price={props.price}
-        thumbnail={props.thumbnail}
+        text={props.data.name}
+        price={props.data.price}
+        thumbnail={props.data.image}
       />
     </div>
   )
