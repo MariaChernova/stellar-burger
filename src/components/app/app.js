@@ -28,8 +28,11 @@ export default function App() {
     <div className={appStyles.container}>
       <AppHeader  />
       <main className={appStyles.main}>
-        <BurgerIngredients data={state.ingredients}/>
-        <BurgerConstructor data={state.ingredients}/>
+        <h1 className={`${appStyles.constructorTitle} text text_type_main-large mb-5`}>Соберите бургер</h1>
+        <div className={appStyles.constructor}>
+          <BurgerIngredients data={state.ingredients}/>
+          <BurgerConstructor data={state.ingredients}/>
+        </div>
       </main>
     </div>
   )

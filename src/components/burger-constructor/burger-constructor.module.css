@@ -9,29 +9,35 @@
 .positions {
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
-  height: 80%;
-}
-
-.positions::-webkit-scrollbar {
-  width: 8px;
-  background-color: #2F2F37;
-}
- 
-.positions::-webkit-scrollbar-thumb {
-  background: #8585AD; 
+  height: calc(100% - 114px);
 }
 
 .sum {
   display: flex;
   flex-direction: row;
   align-items: center;
-  position: absolute;
-  bottom: 0;
-  right: 16px;
+  align-self: flex-end;
+  justify-self: end;
+  margin-bottom: 30px;
 }
 
 .sum svg {
   width: 32px;
   height: 32px;
+}
+
+.scrollPositions {
+  display: flex;
+  overflow: hidden;
+  overflow-y: scroll;
+  flex-direction: column;
+}
+
+.scrollPositions::-webkit-scrollbar {
+  width: 8px;
+  background-color: #2F2F37;
+}
+ 
+.scrollPositions::-webkit-scrollbar-thumb {
+  background: #8585AD; 
 }
