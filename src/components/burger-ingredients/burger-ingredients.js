@@ -10,7 +10,6 @@ export default function BurgerIngredients(props) {
 
   return (
     <div className={`${burgerIngredientsStyles.container} mr-5`}>
-      <h1 className={'text text_type_main-large mb-5'}>Соберите бургер</h1>
       <div className={`${burgerIngredientsStyles.tabs} mb-8`}>
         <Tab value="Булки" active={current === 'Булки'} onClick={setCurrent}>
           Булки
