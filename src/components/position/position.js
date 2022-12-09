@@ -5,7 +5,9 @@ import { Typography, Box, Tab, DragIcon, ConstructorElement } from '@ya.praktiku
 export default function Position(props) {
   return (
     <div className={`${positionStyles.item} ml-4 mb-4`}>
-      <div className={'mr-2'}><DragIcon type="primary" /></div>
+      <div className={`${positionStyles.drag} mr-2`}>
+        {!props.isLocked && <DragIcon type="primary" />}
+      </div>
       <ConstructorElement
         type={props.type}
         isLocked={props.isLocked}
