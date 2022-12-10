@@ -12,13 +12,13 @@ export default function BurgerConstructor (props) {
     <div className={burgerConstructorStyles.container}>
       {props.data !== null &&
         <div className={burgerConstructorStyles.positions}>
-          <Position type={'top'} isLocked={true} data={props.data[bun]} />
+          <Position key={0} type={'top'} isLocked={true} data={props.data[bun]} />
           <div className={burgerConstructorStyles.scrollPositions}>
-            {positions.map((position) => 
-              <Position type={'undefined'} isLocked={false} data={props.data[position]} />
+            {positions.map((position, index) => 
+              <Position key={index + 2} type={'undefined'} isLocked={false} data={props.data[position]} />
             )}
           </div>
-          <Position type={'bottom'} isLocked={true} data={props.data[bun]} />
+          <Position key={1} type={'bottom'} isLocked={true} data={props.data[bun]} />
         </div>
       }
       <div className={`${burgerConstructorStyles.sum} mt-5 mr-4`}>  
