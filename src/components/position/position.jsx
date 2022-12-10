@@ -1,5 +1,5 @@
 import positionStyles from './position.module.css';
-import { Typography, Box, Tab, DragIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import { DragIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 
 
