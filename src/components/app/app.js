@@ -22,11 +22,14 @@ export default function App() {
 
   React.useEffect(() => {
     const getIngredients = async () => {
-      const url = `https://${apiDomen}/api/ingredients`;
-      const res = await fetch(url);
-      const data = await res.json();
-      setState({ ingredients: data.data });
-      // TODO: Handle errors
+      try {
+        const url = `https://${apiDomen}/api/ingredients`;
+        const res = await fetch(url);
+        const data = await res.json();
+        setState({ ingredients: data.data });
+      } catch (error) {
+        console.log(`Error while trying data from server: ${error}`);
+      }
     }
 
     getIngredients();
