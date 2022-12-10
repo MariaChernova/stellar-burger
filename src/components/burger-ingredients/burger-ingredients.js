@@ -27,7 +27,7 @@ export default function BurgerIngredients(props) {
           <div className={`${burgerIngredientsStyles.block} mt-1 ml-4 mr-4`}>
             {props.data !== null && 
               props.data.filter(obj => obj.type === 'bun').map((obj) => (
-                <Item key={obj.id} data={obj} openIngredientModal={props.openIngredientModal}/>
+                <Item key={obj._id} data={obj} openIngredientModal={props.openIngredientModal}/>
               ))}
           </div>
         </div>
@@ -35,7 +35,7 @@ export default function BurgerIngredients(props) {
           <h2 className={'text text_type_main-medium mt-2 mb-6'}>Соусы</h2>
           <div className={burgerIngredientsStyles.block}>
             {props.data !== null && props.data.filter(obj => obj.type === 'sauce').map((obj) => (
-              <Item key={obj.id} data={obj}  openIngredientModal={props.openIngredientModal} />
+              <Item key={obj._id} data={obj}  openIngredientModal={props.openIngredientModal} />
             ))}
           </div>
         </div>
@@ -43,7 +43,7 @@ export default function BurgerIngredients(props) {
           <h2 className={'text text_type_main-medium mt-2 mb-6'}>Начинки</h2>
           <div className={burgerIngredientsStyles.block}>
            {props.data !== null && props.data.filter(obj => obj.type === 'main').map((obj) => (
-              <Item key={obj.id} data={obj}  openIngredientModal={props.openIngredientModal} />
+              <Item key={obj._id} data={obj}  openIngredientModal={props.openIngredientModal} />
             ))}
           </div>
         </div>

@@ -3,7 +3,7 @@ import itemStyles from './item.module.css';
 
 export default function Item(props) {
 
-  const handleComponentClick = (item) => {
+  const handleComponentClick = () => {
     props.openIngredientModal(props.data);
   }
 
