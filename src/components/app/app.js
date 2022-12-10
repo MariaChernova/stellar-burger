@@ -6,15 +6,18 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients.js';
 import BurgerConstructor from '../burger-constructor/burger-constructor.js';
 import Modal from '../modal/modal.js';
 import IngredientDetails from '../ingredient-details/ingredient-details.js';
+import OrderDetails from '../order-details/order-details.js';
 
+
+const MODAL_TYPE_INGREDIENTS = 'ingredients';
+const MODAL_TYPE_ORDER_DETAILS = 'order';
 
 export default function App() {
   const apiDomen = 'norma.nomoreparties.space';
   
   const [state, setState] = React.useState({ 
     ingredients: null,
-    modalIsOpened: false,
-    modalItem: null,
+    modal: null,
   })
 
   React.useEffect(() => {
@@ -29,19 +32,32 @@ export default function App() {
     getIngredients();
   }, [])
 
-  const openModal = (data) => {
+  const openIngredientModal = (data) => {
     setState({
       ...state,
-      modalIsOpened: true,
-      modalItem: data,
+      modal : {
+        header: 'Детали ингредиента',
+        type: MODAL_TYPE_INGREDIENTS,
+        item: data,
+      }
+    })
+  }
+
+  const openOrderModal = () => {
+    setState({
+      ...state,
+      modal : {
+        header: '',
+        type: MODAL_TYPE_ORDER_DETAILS,
+        id: '034536',
+      }
     })
   }
 
   const closeModal = () => {
     setState({
       ...state,
-      modalIsOpened: false,
-      modalItem: null,
+      modal: null,
     })
   }
 
@@ -51,13 +67,14 @@ export default function App() {
       <main className={appStyles.main}>
         <h1 className={`${appStyles.constructorTitle} text text_type_main-large mb-5`}>Соберите бургер</h1>
         <div className={appStyles.constructor}>
-          <BurgerIngredients data={state.ingredients} openModal={openModal}/>
-          <BurgerConstructor data={state.ingredients}/>
+          <BurgerIngredients data={state.ingredients} openIngredientModal={openIngredientModal}/>
+          <BurgerConstructor data={state.ingredients} openOrderModal={openOrderModal}/>
         </div>
-        {state.modalIsOpened && 
-        <Modal onClose={closeModal} header={'Детали ингредиента'}>
-          <IngredientDetails data={state.modalItem} />
-        </Modal> }
+        {state.modal && 
+        <Modal onClose={closeModal} header={state.modal.header}>
+          {state.modal.type === MODAL_TYPE_INGREDIENTS && <IngredientDetails data={state.modal.item} />}
+          {state.modal.type === MODAL_TYPE_ORDER_DETAILS && <OrderDetails id={state.modal.id}/>}
+        </Modal>}
       </main>
     </div>
   )
