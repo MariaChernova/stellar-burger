@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 const modalRoot = document.getElementById('modal-root');
 
 export default function Modal(props) {
-
   const { children, header, onClose } = props;
 
   const close = () => {
