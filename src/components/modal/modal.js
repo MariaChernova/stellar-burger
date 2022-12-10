@@ -12,6 +12,21 @@ export default function Modal(props) {
     props.closeModal();
   }
 
+  const escFunction = React.useCallback((event) => {
+    if (event.key === "Escape") {
+      close();
+    }
+  }, []);
+
+  React.useEffect(() => {
+    document.addEventListener("keydown", escFunction, false);
+
+    return () => {
+      document.removeEventListener("keydown", escFunction, false);
+    };
+  }, []);
+
+
   return ReactDOM.createPortal(
     (
       <div className={modalStyles.container}>
