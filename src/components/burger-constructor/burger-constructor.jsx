@@ -1,4 +1,4 @@
-import Position from '../position/position.js';
+import Position from '../position/position.jsx';
 import burgerConstructorStyles from './burger-constructor.module.css';
 import { Typography, Box, Tab, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
