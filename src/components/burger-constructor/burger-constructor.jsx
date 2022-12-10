@@ -8,6 +8,10 @@ export default function BurgerConstructor (props) {
   const bun = 0;
   const positions = [4, 6, 8, 4, 6, 8, 5];
 
+  const totalPrice = props.data
+    ? positions.reduce((accumulator, item) => accumulator + props.data[item].price, 0)
+    : 0;
+
   return (
     <div className={burgerConstructorStyles.container}>
       {props.data !== null &&
@@ -22,7 +26,7 @@ export default function BurgerConstructor (props) {
         </div>
       }
       <div className={`${burgerConstructorStyles.sum} mt-5 mr-4`}>  
-        <p className={'text text_type_main-large mr-2'}>650</p>
+        <p className={'text text_type_main-large mr-2'}>{totalPrice}</p>
         <CurrencyIcon type="primary" />
         <Button extraClass={'ml-10'} htmlType="button" type="primary" size="large" onClick={props.openOrderModal}>Оформить заказ</Button>
       </div>

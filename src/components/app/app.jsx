@@ -8,11 +8,11 @@ import IngredientDetails from '../ingredient-details/ingredient-details.jsx';
 import OrderDetails from '../order-details/order-details.jsx';
 
 
+const API_DOMEN = 'norma.nomoreparties.space';
 const MODAL_TYPE_INGREDIENTS = 'ingredients';
 const MODAL_TYPE_ORDER_DETAILS = 'order';
 
 export default function App() {
-  const apiDomen = 'norma.nomoreparties.space';
   
   const [state, setState] = React.useState({ 
     ingredients: null,
@@ -22,7 +22,7 @@ export default function App() {
   React.useEffect(() => {
     const getIngredients = async () => {
       try {
-        const url = `https://${apiDomen}/api/ingredients`;
+        const url = `https://${API_DOMEN}/api/ingredients`;
         const res = await fetch(url);
         const data = await res.json();
         setState({ ingredients: data.data });
