@@ -49,7 +49,7 @@ export default function App() {
           <BurgerIngredients data={state.ingredients} openModal={openModal}/>
           <BurgerConstructor data={state.ingredients}/>
         </div>
-        {state.modalIsOpened && <Modal/> }
+        {state.modalIsOpened && <Modal closeModal={closeModal}/> }
       </main>
     </div>
   )
