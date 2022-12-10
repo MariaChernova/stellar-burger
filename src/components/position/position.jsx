@@ -1,5 +1,7 @@
 import positionStyles from './position.module.css';
 import { Typography, Box, Tab, DragIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import PropTypes from 'prop-types';
+
 
 
 export default function Position(props) {
@@ -17,4 +19,8 @@ export default function Position(props) {
       />
     </div>
   )
+}
+
+Position.propTypes = {
+  id: PropTypes.string
 }

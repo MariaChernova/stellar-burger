@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import ModalOverlay from '../modal-overlay/modal-overlay.jsx';
 import modalStyles from './modal.module.css';
 import { Typography, Box, CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import PropTypes from 'prop-types';
+
 
 const modalRoot = document.getElementById('modal-root');
 
@@ -43,4 +45,12 @@ export default function Modal(props) {
     ),
     modalRoot
   );
+}
+
+Modal.propTypes = {
+  data: PropTypes.shape({
+    image: PropTypes.string,
+    name: PropTypes.string,
+    count: PropTypes.number,
+  }),
 }
