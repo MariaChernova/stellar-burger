@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import ModalOverlay from '../modal-overlay/modal-overlay.js';
 import modalStyles from './modal.module.css';
 import { Typography, Box, CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import IngredientDetails from '../ingredient-details/ingredient-details.js';
 
 const modalRoot = document.getElementById('modal-root');
 
@@ -36,6 +37,7 @@ export default function Modal(props) {
             <p className={'text text_type_main-large'}>Детали ингредиента</p>
             <button className={modalStyles.closeButton} onClick={close}><CloseIcon type="primary" /></button>
           </div>
+          <IngredientDetails data={props.data} />
         </div>
       </div>
     ),

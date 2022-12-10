@@ -12,6 +12,7 @@ export default function App() {
   const [state, setState] = React.useState({ 
     ingredients: null,
     modalIsOpened: false,
+    modalItem: null,
   })
 
   React.useEffect(() => {
@@ -26,10 +27,11 @@ export default function App() {
     getIngredients();
   }, [])
 
-  const openModal = () => {
+  const openModal = (data) => {
     setState({
       ...state,
       modalIsOpened: true,
+      modalItem: data,
     })
   }
 
@@ -37,6 +39,7 @@ export default function App() {
     setState({
       ...state,
       modalIsOpened: false,
+      modalItem: null,
     })
   }
 
@@ -49,7 +52,7 @@ export default function App() {
           <BurgerIngredients data={state.ingredients} openModal={openModal}/>
           <BurgerConstructor data={state.ingredients}/>
         </div>
-        {state.modalIsOpened && <Modal closeModal={closeModal}/> }
+        {state.modalIsOpened && <Modal closeModal={closeModal} data={state.modalItem} /> }
       </main>
     </div>
   )

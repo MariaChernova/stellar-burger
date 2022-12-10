@@ -6,7 +6,7 @@ import itemStyles from './item.module.css';
 export default function Item(props) {
 
   const handleComponentClick = (item) => {
-    props.openModal();
+    props.openModal(props.data);
   }
 
   return(
