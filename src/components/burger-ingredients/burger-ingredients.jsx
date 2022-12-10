@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import burgerIngredientsStyles from './burger-ingredients.module.css';
 import { Typography, Box, Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import Item from '../item/item.js';
+import Item from '../item/item.jsx';
 
 
 export default function BurgerIngredients(props) {
