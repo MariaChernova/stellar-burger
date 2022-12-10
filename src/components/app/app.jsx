@@ -53,7 +53,7 @@ export default function App() {
         type: MODAL_TYPE_ORDER_DETAILS,
         id: '034536',
       }
-    })
+    });
   }
 
   const closeModal = () => {
@@ -61,7 +61,6 @@ export default function App() {
       ...state,
       modal: null,
     });
-    console.log('хуй');
   }
 
   return (
