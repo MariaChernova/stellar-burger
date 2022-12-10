@@ -24,7 +24,7 @@ export default function BurgerConstructor (props) {
       <div className={`${burgerConstructorStyles.sum} mt-5 mr-4`}>  
         <p className={'text text_type_main-large mr-2'}>650</p>
         <CurrencyIcon type="primary" />
-        <Button extraClass={'ml-10'} htmlType="button" type="primary" size="large">Оформить заказ</Button>
+        <Button extraClass={'ml-10'} htmlType="button" type="primary" size="large" onClick={props.openOrderModal}>Оформить заказ</Button>
       </div>
     </div>
   )
