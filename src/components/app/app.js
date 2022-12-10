@@ -4,7 +4,9 @@ import appStyles from './app.module.css';
 import AppHeader from '../app-header/app-header.js';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients.js';
 import BurgerConstructor from '../burger-constructor/burger-constructor.js';
-import Modal from '../modal/modal.js'
+import Modal from '../modal/modal.js';
+import IngredientDetails from '../ingredient-details/ingredient-details.js';
+
 
 export default function App() {
   const apiDomen = 'norma.nomoreparties.space';
@@ -52,7 +54,10 @@ export default function App() {
           <BurgerIngredients data={state.ingredients} openModal={openModal}/>
           <BurgerConstructor data={state.ingredients}/>
         </div>
-        {state.modalIsOpened && <Modal closeModal={closeModal} data={state.modalItem} /> }
+        {state.modalIsOpened && 
+        <Modal onClose={closeModal} header={'Детали ингредиента'}>
+          <IngredientDetails data={state.modalItem} />
+        </Modal> }
       </main>
     </div>
   )
