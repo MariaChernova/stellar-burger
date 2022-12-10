@@ -1,5 +1,7 @@
 import { Typography, Box, CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import itemStyles from './item.module.css';
+import PropTypes from 'prop-types';
+
 
 export default function Item(props) {
 
@@ -18,4 +20,12 @@ export default function Item(props) {
       <p className={`text text_type_main-default" ${itemStyles.p}`}>{props.data.name}</p>
     </div>
   )
+}
+
+Item.propTypes = {
+  data: PropTypes.shape({
+    image: PropTypes.string,
+    name: PropTypes.string,
+    count: PropTypes.number,
+  }),
 }

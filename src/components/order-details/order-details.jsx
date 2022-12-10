@@ -1,5 +1,7 @@
 import orderDetailsStyles from './order-details.module.css';
 import doneImage from '../../images/done.svg';
+import PropTypes from 'prop-types';
+
 
 export default function OrdertDetails(props) {
 
@@ -12,4 +14,8 @@ export default function OrdertDetails(props) {
       <p className="mb-20 text text_type_main-default text_color_inactive">Дождитесь готовности на орбитальной станции</p>
     </div>
   )
+}
+
+OrdertDetails.propTypes = {
+  id: PropTypes.string
 }

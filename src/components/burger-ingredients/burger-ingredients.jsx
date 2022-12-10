@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import burgerIngredientsStyles from './burger-ingredients.module.css';
 import { Typography, Box, Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import Item from '../item/item.jsx';
+import PropTypes from 'prop-types';
+
 
 
 export default function BurgerIngredients(props) {
@@ -51,4 +53,9 @@ export default function BurgerIngredients(props) {
       
     </div>
   )
+}
+
+BurgerIngredients.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object),
+  openIngredientModal: PropTypes.func
 }
