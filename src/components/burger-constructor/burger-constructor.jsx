@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 import Position from '../position/position.jsx';
 import burgerConstructorStyles from './burger-constructor.module.css';
-import { Typography, Box, Tab, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-
+import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
 
 export default function BurgerConstructor (props) {

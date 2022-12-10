@@ -1,4 +1,4 @@
-import { Typography, Box, CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import itemStyles from './item.module.css';
 import PropTypes from 'prop-types';
 

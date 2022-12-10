@@ -1,9 +1,7 @@
 import ingredientDetailsStyles from './ingredient-details.module.css';
 import PropTypes from 'prop-types';
 
-
 export default function IngredientDetails(props) {
-
   return (
     <div className={ingredientDetailsStyles.container}>
       <img src={props.data.image} alt='Image' />
