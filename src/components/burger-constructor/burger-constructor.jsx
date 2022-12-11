@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import Position from '../position/position.jsx';
 import burgerConstructorStyles from './burger-constructor.module.css';
-import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
+import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import {ingredientType} from '../../utils/types.js'
 
 
 export default function BurgerConstructor (props) {
@@ -35,6 +36,6 @@ export default function BurgerConstructor (props) {
 }
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object),
-  openOrderModal: PropTypes.func
+  data: PropTypes.arrayOf(ingredientType),
+  openOrderModal: PropTypes.func.isRequired,
 }

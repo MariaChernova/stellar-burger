@@ -8,9 +8,7 @@ import PropTypes from 'prop-types';
 
 const modalRoot = document.getElementById('modal-root');
 
-export default function Modal(props) {
-  const { children, header, onClose } = props;
-
+export default function Modal({ children, header, onClose }) {
   const close = () => {
     onClose();
   }
@@ -47,9 +45,10 @@ export default function Modal(props) {
 }
 
 Modal.propTypes = {
-  data: PropTypes.shape({
-    image: PropTypes.string,
-    name: PropTypes.string,
-    count: PropTypes.number,
-  }),
+  children: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.element])),
+  header: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
 }

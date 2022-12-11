@@ -1,10 +1,11 @@
 import ingredientDetailsStyles from './ingredient-details.module.css';
-import PropTypes from 'prop-types';
+import {ingredientType} from '../../utils/types.js'
+
 
 export default function IngredientDetails(props) {
   return (
     <div className={ingredientDetailsStyles.container}>
-      <img src={props.data.image} alt='Внешний вид ингредиента' />
+      <img src={props.data.image_large} alt='Внешний вид ингредиента' />
       <h2 className={`${ingredientDetailsStyles.name} text text_type_main-medium mt-4 mb-8`}>{props.data.name}</h2>
       <div className={ingredientDetailsStyles.details}>
         <div className={ingredientDetailsStyles.detail}>
@@ -29,12 +30,5 @@ export default function IngredientDetails(props) {
 }
 
 IngredientDetails.propTypes = {
-  data: PropTypes.shape({
-    image: PropTypes.string,
-    name: PropTypes.string,
-    calories: PropTypes.number,
-    proteins: PropTypes.number,
-    fat: PropTypes.number,
-    carbohydrates: PropTypes.number,
-  }),
+  data: ingredientType.isRequired,
 }

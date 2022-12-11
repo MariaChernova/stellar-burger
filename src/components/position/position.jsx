@@ -1,7 +1,7 @@
 import positionStyles from './position.module.css';
 import { DragIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
-
+import {ingredientType} from '../../utils/types.js'
 
 
 export default function Position(props) {
@@ -28,5 +28,7 @@ export default function Position(props) {
 }
 
 Position.propTypes = {
-  id: PropTypes.string
+  type: PropTypes.string.isRequired,
+  isLocked: PropTypes.bool.isRequired,
+  data: ingredientType.isRequired,
 }

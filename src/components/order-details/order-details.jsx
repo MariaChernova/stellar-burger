@@ -17,5 +17,5 @@ export default function OrdertDetails(props) {
 }
 
 OrdertDetails.propTypes = {
-  id: PropTypes.string
+  id: PropTypes.string.isRequired,
 }

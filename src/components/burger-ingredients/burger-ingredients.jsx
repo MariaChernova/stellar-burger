@@ -3,6 +3,8 @@ import burgerIngredientsStyles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import Item from '../item/item.jsx';
 import PropTypes from 'prop-types';
+import {ingredientType} from '../../utils/types.js'
+
 
 export default function BurgerIngredients(props) {
   const [current, setCurrent] = React.useState('one');
@@ -53,6 +55,6 @@ export default function BurgerIngredients(props) {
 }
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object),
-  openIngredientModal: PropTypes.func
+  data: PropTypes.arrayOf(ingredientType),
+  openIngredientModal: PropTypes.func.isRequired,
 }
