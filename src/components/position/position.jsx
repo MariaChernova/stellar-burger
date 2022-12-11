@@ -5,6 +5,12 @@ import PropTypes from 'prop-types';
 
 
 export default function Position(props) {
+  let text = props.data.name;
+  if (props.type == 'top')
+    text += ' (верх)'
+  else if (props.type == 'bottom')
+    text += ' (низ)'
+
   return (
     <div className={`${positionStyles.item} ml-4 mb-4`}>
       <div className={`${positionStyles.drag} mr-2`}>
@@ -13,7 +19,7 @@ export default function Position(props) {
       <ConstructorElement
         type={props.type}
         isLocked={props.isLocked}
-        text={props.data.name}
+        text={text}
         price={props.data.price}
         thumbnail={props.data.image}
       />
