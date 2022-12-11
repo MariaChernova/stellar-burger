@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export default function IngredientDetails(props) {
   return (
     <div className={ingredientDetailsStyles.container}>
-      <img src={props.data.image} alt='Image' />
+      <img src={props.data.image} alt='Внешний вид ингредиента' />
       <h2 className={`${ingredientDetailsStyles.name} text text_type_main-medium mt-4 mb-8`}>{props.data.name}</h2>
       <div className={ingredientDetailsStyles.details}>
         <div className={ingredientDetailsStyles.detail}>
