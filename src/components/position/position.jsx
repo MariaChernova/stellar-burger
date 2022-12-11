@@ -28,7 +28,7 @@ export default function Position(props) {
 }
 
 Position.propTypes = {
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['top', 'bottom', 'undefined']).isRequired,
   isLocked: PropTypes.bool.isRequired,
   data: ingredientType.isRequired,
 }

@@ -13,13 +13,13 @@ export default function Modal({ children, header, onClose }) {
     onClose();
   }
 
-  const escFunction = React.useCallback((event) => {
-    if (event.key === "Escape") {
-      close();
-    }
-  }, []);
-
   React.useEffect(() => {
+    const escFunction = (event) => {
+      if (event.key === "Escape") {
+        close();
+      }
+    };
+
     document.addEventListener("keydown", escFunction, false);
 
     return () => {
