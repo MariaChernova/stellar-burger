@@ -24,6 +24,9 @@ export default function App() {
       try {
         const url = `https://${API_DOMEN}/api/ingredients`;
         const res = await fetch(url);
+        if (!res.ok) {
+          throw res.statusText;
+        }
         const data = await res.json();
         setState({ ingredients: data.data });
       } catch (error) {
