@@ -1,0 +1,27 @@
+.bg {
+  margin: 40px;
+  background-color: #1C1C21;
+  height: 88px;
+}
+
+.logo {
+}
+
+.button {
+  display: flex;
+  align-items: center;
+}
+
+.ul {
+  display: flex;
+  flex-direction: row;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 1240px;
+  margin: 0 auto;
+  justify-content: space-between;
+}

@@ -1,0 +1,23 @@
+.image {
+  align-self: center;
+}
+
+.priceBlock {
+  display: flex;
+  flex-direction: row;
+}
+
+
+.block {
+  display: flex;
+  flex-direction: column;
+  width: 272px;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.p {
+  text-align: center;
+  height: 48px;
+}
