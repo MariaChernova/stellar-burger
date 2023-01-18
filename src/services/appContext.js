@@ -4,8 +4,15 @@ export const AppContextIntialValue = {
   ingredients: null,
   modal: null,
   constructor: {
-    bun: 0,
-    positions: [4, 6, 8, 4, 6, 8, 5],
+    bun: '60d3b41abdacab0026a733c6',
+    positions: [
+      '60d3b41abdacab0026a733c8',
+      '60d3b41abdacab0026a733ca',
+      '60d3b41abdacab0026a733cc',
+      '60d3b41abdacab0026a733c8',
+      '60d3b41abdacab0026a733ca',
+      '60d3b41abdacab0026a733cc',
+    ],
   }
 }
 

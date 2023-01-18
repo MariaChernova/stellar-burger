@@ -9,7 +9,7 @@ import OrderDetails from '../order-details/order-details.jsx';
 import {AppContextIntialValue, AppContext} from '../../services/appContext'
 
 
-const API_DOMEN = 'norma.nomoreparties.space';
+export const API_DOMEN = 'norma.nomoreparties.space';
 const MODAL_TYPE_INGREDIENTS = 'ingredients';
 const MODAL_TYPE_ORDER_DETAILS = 'order';
 
@@ -49,13 +49,13 @@ export default function App() {
     })
   }
 
-  const openOrderModal = () => {
+  const openOrderModal = (orderNumber) => {
     setState({
       ...state,
       modal : {
         header: '',
         type: MODAL_TYPE_ORDER_DETAILS,
-        id: '034536',
+        id: orderNumber,
       }
     });
   }
