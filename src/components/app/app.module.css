@@ -1,0 +1,27 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  max-width: 1240px;
+  align-items: center;
+  align-self: center;
+  height: calc(100% - 168px);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+}
+
+.constructor {
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.constructorTitle {
+  align-self: start;;
+}
