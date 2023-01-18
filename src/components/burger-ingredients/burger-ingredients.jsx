@@ -3,10 +3,15 @@ import burgerIngredientsStyles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import Item from '../item/item.jsx';
 import PropTypes from 'prop-types';
-import {ingredientType} from '../../utils/types.js'
+import {AppContext} from '../../services/appContext';
 
 
 export default function BurgerIngredients(props) {
+
+  const {ingredients} = React.useContext(AppContext);
+
+  const {openIngredientModal} = props;
+
   const [current, setCurrent] = React.useState('one');
 
   return (
@@ -26,25 +31,25 @@ export default function BurgerIngredients(props) {
         <div>
           <h2 className={'text text_type_main-medium mt-2 mb-6'}>Булки</h2>
           <div className={`${burgerIngredientsStyles.block} mt-1 ml-4 mr-4`}>
-            {props.data !== null && 
-              props.data.filter(obj => obj.type === 'bun').map((obj) => (
-                <Item key={obj._id} data={obj} openIngredientModal={props.openIngredientModal}/>
+            {ingredients !== null && 
+              ingredients.filter(obj => obj.type === 'bun').map((obj) => (
+                <Item key={obj._id} data={obj} openIngredientModal={openIngredientModal}/>
               ))}
           </div>
         </div>
         <div>
           <h2 className={'text text_type_main-medium mt-2 mb-6'}>Соусы</h2>
           <div className={burgerIngredientsStyles.block}>
-            {props.data !== null && props.data.filter(obj => obj.type === 'sauce').map((obj) => (
-              <Item key={obj._id} data={obj}  openIngredientModal={props.openIngredientModal} />
+            {ingredients !== null && ingredients.filter(obj => obj.type === 'sauce').map((obj) => (
+              <Item key={obj._id} data={obj}  openIngredientModal={openIngredientModal} />
             ))}
           </div>
         </div>
         <div>
           <h2 className={'text text_type_main-medium mt-2 mb-6'}>Начинки</h2>
           <div className={burgerIngredientsStyles.block}>
-           {props.data !== null && props.data.filter(obj => obj.type === 'main').map((obj) => (
-              <Item key={obj._id} data={obj}  openIngredientModal={props.openIngredientModal} />
+           {ingredients !== null && ingredients.filter(obj => obj.type === 'main').map((obj) => (
+              <Item key={obj._id} data={obj}  openIngredientModal={openIngredientModal} />
             ))}
           </div>
         </div>
@@ -55,6 +60,5 @@ export default function BurgerIngredients(props) {
 }
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(ingredientType),
   openIngredientModal: PropTypes.func.isRequired,
 }
