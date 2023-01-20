@@ -1,4 +1,4 @@
-import React from 'react';
+import { combineReducers } from 'redux';
 
 export const AppContextIntialValue = {
   ingredients: null,
@@ -17,4 +17,7 @@ export const AppContextIntialValue = {
   }
 }
 
-export const AppContext = React.createContext(AppContextIntialValue);
+export const rootReducer = combineReducers({
+  // step: stepReducer,
+  // cart: cartReducer,
+});
