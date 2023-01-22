@@ -7,6 +7,7 @@ export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
 export const GET_INGREDIENTS_FAIL = 'GET_INGREDIENTS_FAIL';
 
 export const ADD_INGREDIENT = 'ADD_INGREDIENT';
+export const MOVE_INGREDIENT = 'MOVE_INGREDIENT';
 export const SET_BUN = 'SET_BUN';
 export const DELETE_ITEM = 'DELETE_ITEM';
 
@@ -68,6 +69,21 @@ export const burgerConstructor = (state = constructorInitialState, action) => {
         ...state,
         positions: [...state.positions, action.id]
       };
+    }
+    case MOVE_INGREDIENT: {
+      if (typeof action.to === 'undefined') {
+        return {
+          ...state,
+          positions: [...state.positions.filter((_, index) => index !== action.from), action.id]
+        };
+      } else {
+        const positions = state.positions.slice();
+        positions.splice(action.to, 0, positions.splice(action.from, 1)[0]);
+        return {
+          ...state,
+          positions
+        };
+      }
     }
     case SET_BUN: {
       return {

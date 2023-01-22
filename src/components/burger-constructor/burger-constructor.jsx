@@ -1,12 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import Position from '../position/position.jsx';
 import burgerConstructorStyles from './burger-constructor.module.css';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { API_DOMEN } from '../app/app'
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
-import { OPEN_ORDER_MODAL, MAKE_ORDER_REQUEST, MAKE_ORDER_SUCCESS, MAKE_ORDER_FAIL, ADD_INGREDIENT, SET_BUN } from '../../services/reducers/reducers';
+import { OPEN_ORDER_MODAL, MAKE_ORDER_REQUEST, MAKE_ORDER_SUCCESS, MAKE_ORDER_FAIL, ADD_INGREDIENT, SET_BUN, MOVE_INGREDIENT } from '../../services/reducers/reducers';
 
 export default function BurgerConstructor () {
   const dispatch = useDispatch();
@@ -18,13 +16,26 @@ export default function BurgerConstructor () {
 
   const [{ isHover } , drop] = useDrop({
     accept: "ingredient",
-    drop(item) {
-      dispatch({
-        type: item.type === 'bun' ? SET_BUN : ADD_INGREDIENT,
-        id: item.id
-      });
+    drop(item, monitor) {
+      if (monitor.didDrop())
+        return;
+      if (typeof item.from !== 'undefined') {
+        dispatch({
+          type: MOVE_INGREDIENT,
+          id: item.id,
+          from: item.from
+        });
+      } else {
+        dispatch({
+          type: item.type === 'bun' ? SET_BUN : ADD_INGREDIENT,
+          id: item.id,
+        });
+      }
     },
-});
+    collect: monitor => ({
+      isHover: monitor.isOver(),
+    })
+  });
 
   const makeOrder = async () => {
     try {
@@ -61,10 +72,12 @@ export default function BurgerConstructor () {
       + (bun ? ingredients.find(element => element._id === bun).price * 2 : 0)
     : 0;
 
+  const backgroundColor = isHover ? '#1F1F23' : 'transparent';
+
   return (
     <div className={burgerConstructorStyles.container}>
       {ingredients !== null &&
-        <div className={burgerConstructorStyles.positions} ref={drop}>
+        <div className={burgerConstructorStyles.positions} ref={drop} style={{backgroundColor}}>
           {bun && <Position key={0} type={'top'} isLocked={true} data={ingredients.find(element => element._id === bun)} />}
           <div className={burgerConstructorStyles.scrollPositions}>
             {positions.map((id, index) => 
@@ -81,7 +94,4 @@ export default function BurgerConstructor () {
       </div>
     </div>
   )
-}
-
-BurgerConstructor.propTypes = {
 }

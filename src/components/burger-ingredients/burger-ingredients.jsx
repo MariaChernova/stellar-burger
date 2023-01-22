@@ -3,7 +3,6 @@ import burgerIngredientsStyles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import Item from '../item/item.jsx';
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import { useInView } from 'react-intersection-observer';
 
 const BUNS_TAB = 'buns';
@@ -72,7 +71,4 @@ export default function BurgerIngredients() {
       
     </div>
   )
-}
-
-BurgerIngredients.propTypes = {
 }
