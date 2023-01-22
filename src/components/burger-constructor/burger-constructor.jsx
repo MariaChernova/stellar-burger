@@ -3,22 +3,24 @@ import PropTypes from 'prop-types';
 import Position from '../position/position.jsx';
 import burgerConstructorStyles from './burger-constructor.module.css';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { AppContext } from '../../services/appContext';
 import { API_DOMEN } from '../app/app'
-import { useDispatch } from 'react-redux';
-import { OPEN_ORDER_MODAL } from '../../services/reducers/reducers';
+import { useDispatch, useSelector } from 'react-redux';
+import { OPEN_ORDER_MODAL, MAKE_ORDER_REQUEST, MAKE_ORDER_SUCCESS, MAKE_ORDER_FAIL } from '../../services/reducers/reducers';
 
 
 
 export default function BurgerConstructor () {
   const dispatch = useDispatch();
-  const {ingredients, constructor} = React.useContext(AppContext);
-  const {bun, positions} = constructor;
+  const { ingredients, bun, positions }  = useSelector(store => ({
+    ingredients: store.ingredients.items,
+    bun: store.burgerConstructor.bun,
+    positions: store.burgerConstructor.positions
+  }));
 
   const makeOrder = async () => {
     try {
-      const url = `https://${API_DOMEN}/api/orders`;
-      const res = await fetch(url, {
+      dispatch({type: MAKE_ORDER_REQUEST});
+      const res = await fetch(`https://${API_DOMEN}/api/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -32,12 +34,15 @@ export default function BurgerConstructor () {
       }
       const data = await res.json();
 
+      dispatch({type: MAKE_ORDER_SUCCESS, orderId: data.order.number});
+
       dispatch({
         type: OPEN_ORDER_MODAL,
         id: data.order.number
-      })
+      });
 
     } catch (error) {
+      dispatch({type: MAKE_ORDER_FAIL});
       console.log(`Error while trying data from server: ${error}`);
     }
   };

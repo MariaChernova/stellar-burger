@@ -17,9 +17,9 @@ export const MAKE_ORDER_FAIL = 'MAKE_ORDER_FAIL';
 
 
 export const ingredientsInitialState = {
-  ingredients: null,
-  ingredientsRequest: false,
-  ingredientsFailed: false,
+  items: null,
+  request: false,
+  failed: false,
 }
 
 
@@ -28,21 +28,21 @@ export const ingredients = (state = ingredientsInitialState, action) => {
     case GET_INGREDIENTS_REQUEST: {
       return {
         ...state,
-        ingredientsRequest: true,
+        request: true,
       };
     }
     case GET_INGREDIENTS_SUCCESS: {
       return {
         ...state,
-        ingredients: action.ingredients,
-        ingredientsRequest: false,
+        items: action.ingredients,
+        request: false,
       };
     }
     case GET_INGREDIENTS_FAIL: {
       return {
         ...state,
-        ingredientsRequest: false,
-        ingredientsFailed: true
+        request: false,
+        failed: true
       };
     }
     default: {
@@ -63,7 +63,7 @@ export const constructorInitialState = {
   ],
 }
 
-export const constructor = (state = constructorInitialState, action) => {
+export const burgerConstructor = (state = constructorInitialState, action) => {
   switch (action.type) {
     case GET_CONSTRUCTOR_INGREDIENTS: {
       return {

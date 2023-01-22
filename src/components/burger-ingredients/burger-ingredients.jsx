@@ -2,13 +2,13 @@ import React from 'react';
 import burgerIngredientsStyles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import Item from '../item/item.jsx';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import {AppContext} from '../../services/appContext';
 
 
 export default function BurgerIngredients() {
 
-  const {ingredients} = React.useContext(AppContext);
+  const ingredients = useSelector(store => store.ingredients.items);
 
   const [current, setCurrent] = React.useState('one');
 
