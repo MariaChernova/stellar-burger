@@ -14,14 +14,12 @@ export default function BurgerIngredients() {
 
   const [bunsRef, bunsVisible] = useInView();
   const [sousesRef, sousesVisible] = useInView();
-  const [mainRef, mainVisible] = useInView();
-  
 
   const ingredients = useSelector(store => store.ingredients.items);
 
   const [current, setCurrent] = React.useState(BUNS_TAB);
 
-  const handleScroll = (evt) => {
+  const handleScroll = () => {
     if (bunsVisible) {
       setCurrent(BUNS_TAB)
     } else if (sousesVisible) {
@@ -62,7 +60,7 @@ export default function BurgerIngredients() {
             ))}
           </div>
         </div>
-        <div ref={mainRef}>
+        <div>
           <h2 className={'text text_type_main-medium mt-2 mb-6'}>Начинки</h2>
           <div className={burgerIngredientsStyles.block}>
            {ingredients !== null && ingredients.filter(obj => obj.type === 'main').map((obj) => (
