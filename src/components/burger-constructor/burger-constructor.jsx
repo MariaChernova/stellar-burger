@@ -5,9 +5,8 @@ import burgerConstructorStyles from './burger-constructor.module.css';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { API_DOMEN } from '../app/app'
 import { useDispatch, useSelector } from 'react-redux';
-import { OPEN_ORDER_MODAL, MAKE_ORDER_REQUEST, MAKE_ORDER_SUCCESS, MAKE_ORDER_FAIL } from '../../services/reducers/reducers';
-
-
+import { useDrop } from 'react-dnd';
+import { OPEN_ORDER_MODAL, MAKE_ORDER_REQUEST, MAKE_ORDER_SUCCESS, MAKE_ORDER_FAIL, ADD_INGREDIENT, SET_BUN } from '../../services/reducers/reducers';
 
 export default function BurgerConstructor () {
   const dispatch = useDispatch();
@@ -16,6 +15,16 @@ export default function BurgerConstructor () {
     bun: store.burgerConstructor.bun,
     positions: store.burgerConstructor.positions
   }));
+
+  const [{ isHover } , drop] = useDrop({
+    accept: "ingredient",
+    drop(item) {
+      dispatch({
+        type: item.type === 'bun' ? SET_BUN : ADD_INGREDIENT,
+        id: item.id
+      });
+    },
+});
 
   const makeOrder = async () => {
     try {
@@ -54,7 +63,7 @@ export default function BurgerConstructor () {
   return (
     <div className={burgerConstructorStyles.container}>
       {ingredients !== null &&
-        <div className={burgerConstructorStyles.positions}>
+        <div className={burgerConstructorStyles.positions} ref={drop}>
           <Position key={0} type={'top'} isLocked={true} data={ingredients.find(element => element._id === bun)} />
           <div className={burgerConstructorStyles.scrollPositions}>
             {positions.map((id, index) => 

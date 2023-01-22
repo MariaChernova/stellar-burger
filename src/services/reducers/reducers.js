@@ -6,7 +6,9 @@ export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST';
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
 export const GET_INGREDIENTS_FAIL = 'GET_INGREDIENTS_FAIL';
 
-export const GET_CONSTRUCTOR_INGREDIENTS = 'GET_CONSTRUCTOR_INGREDIENTS';
+export const ADD_INGREDIENT = 'ADD_INGREDIENT';
+export const SET_BUN = 'SET_BUN';
+
 export const OPEN_INGREDIENT_MODAL = 'OPEN_INGREDIENT_MODAL';
 export const OPEN_ORDER_MODAL = 'OPEN_ORDER_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
@@ -14,6 +16,8 @@ export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const MAKE_ORDER_REQUEST = 'MAKE_ORDER_REQUEST';
 export const MAKE_ORDER_SUCCESS = 'MAKE_ORDER_SUCCESS';
 export const MAKE_ORDER_FAIL = 'MAKE_ORDER_FAIL';
+
+
 
 
 export const ingredientsInitialState = {
@@ -55,21 +59,22 @@ export const constructorInitialState = {
   bun: '60d3b41abdacab0026a733c6',
   positions: [
     '60d3b41abdacab0026a733c8',
-    '60d3b41abdacab0026a733ca',
-    '60d3b41abdacab0026a733cc',
-    '60d3b41abdacab0026a733c8',
-    '60d3b41abdacab0026a733ca',
-    '60d3b41abdacab0026a733cc',
+    '60d3b41abdacab0026a733ca'
   ],
 }
 
 export const burgerConstructor = (state = constructorInitialState, action) => {
   switch (action.type) {
-    case GET_CONSTRUCTOR_INGREDIENTS: {
+    case ADD_INGREDIENT: {
       return {
         ...state,
-        bun: action.bun,
-        positions: action.positions
+        positions: [...state.positions, action.id]
+      };
+    }
+    case SET_BUN: {
+      return {
+        ...state,
+        bun: action.id
       };
     }
     default: {

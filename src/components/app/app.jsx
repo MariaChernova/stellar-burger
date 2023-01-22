@@ -8,6 +8,9 @@ import Modal from '../modal/modal.jsx';
 import IngredientDetails from '../ingredient-details/ingredient-details.jsx';
 import OrderDetails from '../order-details/order-details.jsx';
 import { GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, GET_INGREDIENTS_FAIL } from '../../services/reducers/reducers';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { DndProvider } from 'react-dnd';
+
 
 
 
@@ -44,9 +47,11 @@ export default function App() {
       <AppHeader  />
       <main className={appStyles.main}>
         <h1 className={`${appStyles.constructorTitle} text text_type_main-large mb-5`}>Соберите бургер</h1>
-        <div className={appStyles.constructor}>
-          <BurgerIngredients />
-          <BurgerConstructor />
+        <div className={appStyles.constructor} >
+          <DndProvider backend={HTML5Backend}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </DndProvider>
         </div>
         {modal && 
         <Modal header={modal.header}>

@@ -3,12 +3,18 @@ import itemStyles from './item.module.css';
 import {ingredientType} from '../../utils/types.js'
 import { useDispatch } from 'react-redux';
 import { OPEN_INGREDIENT_MODAL } from '../../services/reducers/reducers';
+import { useDrag } from 'react-dnd';
 
-export default function Item(props) {
-
-  const {data} = props;
-
+export default function Item({data}) {
   const dispatch = useDispatch();
+
+  const [{ isDrag }, drag] = useDrag({
+    type: 'ingredient',
+    item: { 
+      id: data._id,
+      type: data.type
+     }
+  });
 
   const handleComponentClick = () => {
     dispatch({
@@ -18,7 +24,7 @@ export default function Item(props) {
   }
 
   return(
-    <div className={`${itemStyles.block} mb-8`} onClick={handleComponentClick}>
+    <div className={`${itemStyles.block} mb-8`} onClick={handleComponentClick} ref={drag} >
       <Counter count={data.count} size="default" extraClass="m-1" />
       <img src={data.image} alt='Внешний вид ингредиента' className={itemStyles.image} />
       <div className={`${itemStyles.priceBlock} mt-1 mb-1`}>
