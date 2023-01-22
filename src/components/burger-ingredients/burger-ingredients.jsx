@@ -14,6 +14,10 @@ export default function BurgerIngredients(props) {
 
   const [current, setCurrent] = React.useState('one');
 
+  const handleScroll = (evt) => {
+    console.log('скролится')
+  }
+
   return (
     <div className={`${burgerIngredientsStyles.container} mr-5`}>
       <div className={`${burgerIngredientsStyles.tabs} mb-8`}>
@@ -27,7 +31,7 @@ export default function BurgerIngredients(props) {
           Начинки
         </Tab>
       </div>
-      <div className={burgerIngredientsStyles.ingredients}>
+      <div className={burgerIngredientsStyles.ingredients} onScroll={handleScroll}>
         <div>
           <h2 className={'text text_type_main-medium mt-2 mb-6'}>Булки</h2>
           <div className={`${burgerIngredientsStyles.block} mt-1 ml-4 mr-4`}>
