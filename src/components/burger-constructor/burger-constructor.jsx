@@ -5,15 +5,15 @@ import burgerConstructorStyles from './burger-constructor.module.css';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { AppContext } from '../../services/appContext';
 import { API_DOMEN } from '../app/app'
+import { useDispatch } from 'react-redux';
+import { OPEN_ORDER_MODAL } from '../../services/reducers/reducers';
 
 
 
-export default function BurgerConstructor (props) {
-
+export default function BurgerConstructor () {
+  const dispatch = useDispatch();
   const {ingredients, constructor} = React.useContext(AppContext);
   const {bun, positions} = constructor;
-
-  const {openOrderModal} = props;
 
   const makeOrder = async () => {
     try {
@@ -31,7 +31,12 @@ export default function BurgerConstructor (props) {
         throw res.statusText;
       }
       const data = await res.json();
-      openOrderModal(data.order.number);
+
+      dispatch({
+        type: OPEN_ORDER_MODAL,
+        id: data.order.number
+      })
+
     } catch (error) {
       console.log(`Error while trying data from server: ${error}`);
     }
@@ -64,5 +69,4 @@ export default function BurgerConstructor (props) {
 }
 
 BurgerConstructor.propTypes = {
-  openOrderModal: PropTypes.func.isRequired,
 }

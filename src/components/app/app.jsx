@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import appStyles from './app.module.css';
 import AppHeader from '../app-header/app-header.jsx';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients.jsx';
@@ -14,6 +15,7 @@ const MODAL_TYPE_INGREDIENTS = 'ingredients';
 const MODAL_TYPE_ORDER_DETAILS = 'order';
 
 export default function App() {
+  const modal = useSelector(store => store.modal);
   
   const [state, setState] = React.useState(AppContextIntialValue);
 
@@ -38,35 +40,6 @@ export default function App() {
     getIngredients();
   }, [])
 
-  const openIngredientModal = (data) => {
-    setState({
-      ...state,
-      modal : {
-        header: 'Детали ингредиента',
-        type: MODAL_TYPE_INGREDIENTS,
-        item: data,
-      }
-    })
-  }
-
-  const openOrderModal = (orderNumber) => {
-    setState({
-      ...state,
-      modal : {
-        header: '',
-        type: MODAL_TYPE_ORDER_DETAILS,
-        id: orderNumber,
-      }
-    });
-  }
-
-  const closeModal = () => {
-    setState({
-      ...state,
-      modal: null,
-    });
-  }
-
   return (
     <div className={appStyles.container}>
       <AppContext.Provider value={state}>
@@ -74,13 +47,13 @@ export default function App() {
         <main className={appStyles.main}>
           <h1 className={`${appStyles.constructorTitle} text text_type_main-large mb-5`}>Соберите бургер</h1>
           <div className={appStyles.constructor}>
-            <BurgerIngredients openIngredientModal={openIngredientModal}/>
-            <BurgerConstructor openOrderModal={openOrderModal}/>
+            <BurgerIngredients />
+            <BurgerConstructor />
           </div>
-          {state.modal && 
-          <Modal onClose={closeModal} header={state.modal.header}>
-            {state.modal.type === MODAL_TYPE_INGREDIENTS && <IngredientDetails data={state.modal.item} />}
-            {state.modal.type === MODAL_TYPE_ORDER_DETAILS && <OrderDetails id={state.modal.id}/>}
+          {modal && 
+          <Modal header={modal.header}>
+            {modal.type === MODAL_TYPE_INGREDIENTS && <IngredientDetails data={modal.item} />}
+            {modal.type === MODAL_TYPE_ORDER_DETAILS && <OrderDetails id={modal.id}/>}
           </Modal>}
         </main>
       </AppContext.Provider>

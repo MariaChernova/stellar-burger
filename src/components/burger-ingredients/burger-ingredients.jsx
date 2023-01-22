@@ -6,11 +6,9 @@ import PropTypes from 'prop-types';
 import {AppContext} from '../../services/appContext';
 
 
-export default function BurgerIngredients(props) {
+export default function BurgerIngredients() {
 
   const {ingredients} = React.useContext(AppContext);
-
-  const {openIngredientModal} = props;
 
   const [current, setCurrent] = React.useState('one');
 
@@ -37,7 +35,7 @@ export default function BurgerIngredients(props) {
           <div className={`${burgerIngredientsStyles.block} mt-1 ml-4 mr-4`}>
             {ingredients !== null && 
               ingredients.filter(obj => obj.type === 'bun').map((obj) => (
-                <Item key={obj._id} data={obj} openIngredientModal={openIngredientModal}/>
+                <Item key={obj._id} data={obj} />
               ))}
           </div>
         </div>
@@ -45,7 +43,7 @@ export default function BurgerIngredients(props) {
           <h2 className={'text text_type_main-medium mt-2 mb-6'}>Соусы</h2>
           <div className={burgerIngredientsStyles.block}>
             {ingredients !== null && ingredients.filter(obj => obj.type === 'sauce').map((obj) => (
-              <Item key={obj._id} data={obj}  openIngredientModal={openIngredientModal} />
+              <Item key={obj._id} data={obj} />
             ))}
           </div>
         </div>
@@ -53,7 +51,7 @@ export default function BurgerIngredients(props) {
           <h2 className={'text text_type_main-medium mt-2 mb-6'}>Начинки</h2>
           <div className={burgerIngredientsStyles.block}>
            {ingredients !== null && ingredients.filter(obj => obj.type === 'main').map((obj) => (
-              <Item key={obj._id} data={obj}  openIngredientModal={openIngredientModal} />
+              <Item key={obj._id} data={obj} />
             ))}
           </div>
         </div>
@@ -64,5 +62,4 @@ export default function BurgerIngredients(props) {
 }
 
 BurgerIngredients.propTypes = {
-  openIngredientModal: PropTypes.func.isRequired,
 }
