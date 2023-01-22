@@ -67,7 +67,7 @@ export default function BurgerConstructor () {
           <Position key={0} type={'top'} isLocked={true} data={ingredients.find(element => element._id === bun)} />
           <div className={burgerConstructorStyles.scrollPositions}>
             {positions.map((id, index) => 
-              <Position key={index + 2} type={'undefined'} isLocked={false} data={ingredients.find(element => element._id === id)} />
+              <Position key={index + 2} index={index} type={'undefined'} isLocked={false} data={ingredients.find(element => element._id === id)} />
             )}
           </div>
           <Position key={1} type={'bottom'} isLocked={true} data={ingredients.find(element => element._id === bun)} />

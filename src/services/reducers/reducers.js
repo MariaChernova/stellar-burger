@@ -8,6 +8,7 @@ export const GET_INGREDIENTS_FAIL = 'GET_INGREDIENTS_FAIL';
 
 export const ADD_INGREDIENT = 'ADD_INGREDIENT';
 export const SET_BUN = 'SET_BUN';
+export const DELETE_ITEM = 'DELETE_ITEM';
 
 export const OPEN_INGREDIENT_MODAL = 'OPEN_INGREDIENT_MODAL';
 export const OPEN_ORDER_MODAL = 'OPEN_ORDER_MODAL';
@@ -75,6 +76,12 @@ export const burgerConstructor = (state = constructorInitialState, action) => {
       return {
         ...state,
         bun: action.id
+      };
+    }
+    case DELETE_ITEM: {
+      return {
+        ...state,
+        positions: state.positions.filter((_, index) => index !== action.index)
       };
     }
     default: {
