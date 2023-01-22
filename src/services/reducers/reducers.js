@@ -57,11 +57,8 @@ export const ingredients = (state = ingredientsInitialState, action) => {
 }
 
 export const constructorInitialState = {
-  bun: '60d3b41abdacab0026a733c6',
-  positions: [
-    '60d3b41abdacab0026a733c8',
-    '60d3b41abdacab0026a733ca'
-  ],
+  bun: null,
+  positions: [],
 }
 
 export const burgerConstructor = (state = constructorInitialState, action) => {

@@ -58,19 +58,20 @@ export default function BurgerConstructor () {
 
   const totalPrice = ingredients
     ? positions.reduce((accumulator, item) => accumulator + ingredients.find(element => element._id === item).price, 0)
+      + (bun ? ingredients.find(element => element._id === bun).price * 2 : 0)
     : 0;
 
   return (
     <div className={burgerConstructorStyles.container}>
       {ingredients !== null &&
         <div className={burgerConstructorStyles.positions} ref={drop}>
-          <Position key={0} type={'top'} isLocked={true} data={ingredients.find(element => element._id === bun)} />
+          {bun && <Position key={0} type={'top'} isLocked={true} data={ingredients.find(element => element._id === bun)} />}
           <div className={burgerConstructorStyles.scrollPositions}>
             {positions.map((id, index) => 
               <Position key={index + 2} index={index} type={'undefined'} isLocked={false} data={ingredients.find(element => element._id === id)} />
             )}
           </div>
-          <Position key={1} type={'bottom'} isLocked={true} data={ingredients.find(element => element._id === bun)} />
+          {bun && <Position key={1} type={'bottom'} isLocked={true} data={ingredients.find(element => element._id === bun)} />}
         </div>
       }
       <div className={`${burgerConstructorStyles.sum} mt-5 mr-4`}>  
