@@ -5,7 +5,7 @@ import modalStyles from './modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { CLOSE_MODAL } from '../../services/reducers/reducers';
+import { CLOSE_MODAL } from '../../services/actions/actions';
 
 
 const modalRoot = document.getElementById('modal-root');

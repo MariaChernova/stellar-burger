@@ -4,7 +4,7 @@ import { DragIcon, ConstructorElement } from '@ya.praktikum/react-developer-burg
 import PropTypes from 'prop-types';
 import {ingredientType} from '../../utils/types.js';
 import { useDispatch } from 'react-redux';
-import { DELETE_ITEM, MOVE_INGREDIENT, SET_BUN, ADD_INGREDIENT } from '../../services/reducers/reducers';
+import { DELETE_ITEM, MOVE_INGREDIENT, SET_BUN, ADD_INGREDIENT } from '../../services/actions/actions';
 import { useDrag, useDrop } from 'react-dnd';
 
 

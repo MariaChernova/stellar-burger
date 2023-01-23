@@ -1,33 +1,27 @@
+import {
+  GET_INGREDIENTS_REQUEST,
+  GET_INGREDIENTS_SUCCESS,
+  GET_INGREDIENTS_FAIL,
+  ADD_INGREDIENT,
+  MOVE_INGREDIENT,
+  SET_BUN,
+  DELETE_ITEM,
+  OPEN_INGREDIENT_MODAL,
+  OPEN_ORDER_MODAL,
+  CLOSE_MODAL,
+  MAKE_ORDER_REQUEST,
+  MAKE_ORDER_SUCCESS,
+  MAKE_ORDER_FAIL
+} from '../actions/actions';
+
 const MODAL_TYPE_INGREDIENTS = 'ingredients';
 const MODAL_TYPE_ORDER_DETAILS = 'order';
 
-
-export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST';
-export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
-export const GET_INGREDIENTS_FAIL = 'GET_INGREDIENTS_FAIL';
-
-export const ADD_INGREDIENT = 'ADD_INGREDIENT';
-export const MOVE_INGREDIENT = 'MOVE_INGREDIENT';
-export const SET_BUN = 'SET_BUN';
-export const DELETE_ITEM = 'DELETE_ITEM';
-
-export const OPEN_INGREDIENT_MODAL = 'OPEN_INGREDIENT_MODAL';
-export const OPEN_ORDER_MODAL = 'OPEN_ORDER_MODAL';
-export const CLOSE_MODAL = 'CLOSE_MODAL';
-
-export const MAKE_ORDER_REQUEST = 'MAKE_ORDER_REQUEST';
-export const MAKE_ORDER_SUCCESS = 'MAKE_ORDER_SUCCESS';
-export const MAKE_ORDER_FAIL = 'MAKE_ORDER_FAIL';
-
-
-
-
-export const ingredientsInitialState = {
+const ingredientsInitialState = {
   items: null,
   request: false,
   failed: false,
 }
-
 
 export const ingredients = (state = ingredientsInitialState, action) => {
   switch (action.type) {

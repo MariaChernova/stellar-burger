@@ -2,7 +2,7 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import itemStyles from './item.module.css';
 import {ingredientType} from '../../utils/types.js'
 import { useDispatch, useSelector } from 'react-redux';
-import { OPEN_INGREDIENT_MODAL } from '../../services/reducers/reducers';
+import { OPEN_INGREDIENT_MODAL } from '../../services/actions/actions';
 import { useDrag } from 'react-dnd';
 
 export default function Item({data}) {
