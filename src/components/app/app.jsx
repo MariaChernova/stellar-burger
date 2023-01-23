@@ -22,22 +22,24 @@ export default function App() {
   
 
   React.useEffect(() => {
-    const getIngredients = async () => {
-      try {
-        dispatch({type: GET_INGREDIENTS_REQUEST});
-        const res = await fetch(`https://${API_DOMEN}/api/ingredients`);
-        if (!res.ok) {
-          throw res.statusText;
+    const getIngredients = () => {
+      return async (dispatch0) => {
+        try {
+          dispatch0({type: GET_INGREDIENTS_REQUEST});
+          const res = await fetch(`https://${API_DOMEN}/api/ingredients`);
+          if (!res.ok) {
+            throw res.statusText;
+          }
+          const data = await res.json();
+          dispatch0({type: GET_INGREDIENTS_SUCCESS, ingredients: data.data});
+        } catch (error) {
+          dispatch0({type: GET_INGREDIENTS_FAIL});
+          console.log(`Error while trying data from server: ${error}`);
         }
-        const data = await res.json();
-        dispatch({type: GET_INGREDIENTS_SUCCESS, ingredients: data.data});
-      } catch (error) {
-        dispatch({type: GET_INGREDIENTS_FAIL});
-        console.log(`Error while trying data from server: ${error}`);
       }
     }
 
-    getIngredients();
+    dispatch(getIngredients());
   }, [])
 
   return (

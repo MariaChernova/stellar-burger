@@ -37,35 +37,41 @@ export default function BurgerConstructor () {
     })
   });
 
-  const makeOrder = async () => {
-    try {
-      dispatch({type: MAKE_ORDER_REQUEST});
-      const res = await fetch(`https://${API_DOMEN}/api/orders`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          ingredients: [bun, ...positions, bun]
-        })
-      });
-      if (!res.ok) {
-        throw res.statusText;
+  const makeOrder = () => {
+    return async (dispatch0) => {
+      try {
+        dispatch0({type: MAKE_ORDER_REQUEST});
+        const res = await fetch(`https://${API_DOMEN}/api/orders`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            ingredients: [bun, ...positions, bun]
+          })
+        });
+        if (!res.ok) {
+          throw res.statusText;
+        }
+        const data = await res.json();
+
+        dispatch0({type: MAKE_ORDER_SUCCESS, orderId: data.order.number});
+
+        dispatch0({
+          type: OPEN_ORDER_MODAL,
+          id: data.order.number
+        });
+
+      } catch (error) {
+        dispatch0({type: MAKE_ORDER_FAIL});
+        console.log(`Error while trying data from server: ${error}`);
       }
-      const data = await res.json();
-
-      dispatch({type: MAKE_ORDER_SUCCESS, orderId: data.order.number});
-
-      dispatch({
-        type: OPEN_ORDER_MODAL,
-        id: data.order.number
-      });
-
-    } catch (error) {
-      dispatch({type: MAKE_ORDER_FAIL});
-      console.log(`Error while trying data from server: ${error}`);
     }
   };
+
+  const handleClick = () => {
+    dispatch(makeOrder())
+  }
 
   const totalPrice = ingredients
     ? positions.reduce((accumulator, item) => accumulator + ingredients.find(element => element._id === item).price, 0)
@@ -90,7 +96,7 @@ export default function BurgerConstructor () {
       <div className={`${burgerConstructorStyles.sum} mt-5 mr-4`}>  
         <p className={'text text_type_main-large mr-2'}>{totalPrice}</p>
         <CurrencyIcon type="primary" />
-        <Button extraClass={'ml-10'} htmlType="button" type="primary" size="large" onClick={makeOrder}>Оформить заказ</Button>
+        <Button extraClass={'ml-10'} htmlType="button" type="primary" size="large" onClick={handleClick}>Оформить заказ</Button>
       </div>
     </div>
   )
