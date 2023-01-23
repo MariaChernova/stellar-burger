@@ -4,7 +4,16 @@ import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-co
 import { API_DOMEN } from '../app/app'
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
-import { OPEN_ORDER_MODAL, MAKE_ORDER_REQUEST, MAKE_ORDER_SUCCESS, MAKE_ORDER_FAIL, ADD_INGREDIENT, SET_BUN, MOVE_INGREDIENT } from '../../services/actions/actions';
+import { checkResponse } from '../../utils/checkResponse';
+import {
+  OPEN_ORDER_MODAL,
+  MAKE_ORDER_REQUEST,
+  MAKE_ORDER_SUCCESS,
+  MAKE_ORDER_FAIL,
+  ADD_INGREDIENT,
+  SET_BUN,
+  MOVE_INGREDIENT
+} from '../../services/actions/actions';
 
 export default function BurgerConstructor () {
   const dispatch = useDispatch();
@@ -50,9 +59,7 @@ export default function BurgerConstructor () {
             ingredients: [bun, ...positions, bun]
           })
         });
-        if (!res.ok) {
-          throw res.statusText;
-        }
+        checkResponse(res);
         const data = await res.json();
 
         dispatch0({type: MAKE_ORDER_SUCCESS, orderId: data.order.number});

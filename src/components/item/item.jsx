@@ -37,7 +37,7 @@ export default function Item({data}) {
   return(
     <div className={`${itemStyles.block} mb-8`} onClick={handleComponentClick} ref={drag} >
       <Counter count={count} size="default" extraClass="m-1" />
-      <img src={data.image} alt='Внешний вид ингредиента' className={itemStyles.image} />
+      <img src={data.image} alt={data.name} className={itemStyles.image} />
       <div className={`${itemStyles.priceBlock} mt-1 mb-1`}>
         <p className={'text text_type_digits-default mr-2'}>{data.price}</p>
         <CurrencyIcon type="primary" />

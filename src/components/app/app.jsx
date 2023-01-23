@@ -10,6 +10,7 @@ import OrderDetails from '../order-details/order-details.jsx';
 import { GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, GET_INGREDIENTS_FAIL } from '../../services/actions/actions';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
+import { checkResponse } from '../../utils/checkResponse'
 
 
 export const API_DOMEN = 'norma.nomoreparties.space';
@@ -27,9 +28,7 @@ export default function App() {
         try {
           dispatch0({type: GET_INGREDIENTS_REQUEST});
           const res = await fetch(`https://${API_DOMEN}/api/ingredients`);
-          if (!res.ok) {
-            throw res.statusText;
-          }
+          checkResponse(res);
           const data = await res.json();
           dispatch0({type: GET_INGREDIENTS_SUCCESS, ingredients: data.data});
         } catch (error) {
