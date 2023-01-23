@@ -16,7 +16,7 @@ export default function Item({data}) {
   if (data.type === 'bun') {
     count = data._id === bun ? 2 : 0; 
   } else {
-    count = positions.reduce((total, element) => data._id === element ? total + 1 : total, 0)
+    count = positions.reduce((total, element) => data._id === element.id ? total + 1 : total, 0)
   }
 
   const [{ isDrag }, drag] = useDrag({

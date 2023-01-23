@@ -8,7 +8,7 @@ import { DELETE_ITEM, MOVE_INGREDIENT, SET_BUN, ADD_INGREDIENT } from '../../ser
 import { useDrag, useDrop } from 'react-dnd';
 
 
-export default function Position({data, type, index, isLocked}) {
+export default function Position({uuid, data, type, index, isLocked}) {
   const ref = useRef(null);
 
   let text = data.name;
@@ -46,8 +46,9 @@ export default function Position({data, type, index, isLocked}) {
     type: 'ingredient',
     item: { 
       id: data._id,
+      uuid: uuid,
       type: data.type,
-      from: index,
+      from: index
     },
     collect: monitor => ({
       isDrag: monitor.isDragging()

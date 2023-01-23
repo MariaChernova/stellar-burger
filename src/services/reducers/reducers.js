@@ -61,14 +61,14 @@ export const burgerConstructor = (state = constructorInitialState, action) => {
     case ADD_INGREDIENT: {
       return {
         ...state,
-        positions: [...state.positions, action.id]
+        positions: [...state.positions, {id: action.id, uuid: action.uuid} ]
       };
     }
     case MOVE_INGREDIENT: {
       if (typeof action.to === 'undefined') {
         return {
           ...state,
-          positions: [...state.positions.filter((_, index) => index !== action.from), action.id]
+          positions: [...state.positions.filter((_, index) => index !== action.from), {id: action.id, uuid: action.uuid}]
         };
       } else {
         const positions = state.positions.slice();

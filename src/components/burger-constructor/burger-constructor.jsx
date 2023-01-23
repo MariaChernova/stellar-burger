@@ -14,6 +14,7 @@ import {
   SET_BUN,
   MOVE_INGREDIENT
 } from '../../services/actions/actions';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function BurgerConstructor () {
   const dispatch = useDispatch();
@@ -32,12 +33,14 @@ export default function BurgerConstructor () {
         dispatch({
           type: MOVE_INGREDIENT,
           id: item.id,
-          from: item.from
+          from: item.from,
+          uuid: item.uuid
         });
       } else {
         dispatch({
           type: item.type === 'bun' ? SET_BUN : ADD_INGREDIENT,
           id: item.id,
+          uuid: uuidv4()
         });
       }
     },
@@ -56,7 +59,7 @@ export default function BurgerConstructor () {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            ingredients: [bun, ...positions, bun]
+            ingredients: [bun, ...positions.map((element) => element.id), bun]
           })
         });
         checkResponse(res);
@@ -81,7 +84,7 @@ export default function BurgerConstructor () {
   }
 
   const totalPrice = ingredients
-    ? positions.reduce((accumulator, item) => accumulator + ingredients.find(element => element._id === item).price, 0)
+    ? positions.reduce((accumulator, item) => accumulator + ingredients.find(element => element._id === item.id).price, 0)
       + (bun ? ingredients.find(element => element._id === bun).price * 2 : 0)
     : 0;
 
@@ -93,8 +96,8 @@ export default function BurgerConstructor () {
         <div className={burgerConstructorStyles.positions} ref={drop} style={{backgroundColor}}>
           {bun && <Position key={0} type={'top'} isLocked={true} data={ingredients.find(element => element._id === bun)} />}
           <div className={burgerConstructorStyles.scrollPositions}>
-            {positions.map((id, index) => 
-              <Position key={index + 2} index={index} type={'undefined'} isLocked={false} data={ingredients.find(element => element._id === id)} />
+            {positions.map(({id, uuid}, index) => 
+              <Position key={ uuid } uuid={uuid} id={id} index={index} type={'undefined'} isLocked={false} data={ingredients.find(element => element._id === id)} />
             )}
           </div>
           {bun && <Position key={1} type={'bottom'} isLocked={true} data={ingredients.find(element => element._id === bun)} />}
