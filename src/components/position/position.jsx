@@ -9,8 +9,6 @@ import { useDrag, useDrop } from 'react-dnd';
 
 
 export default function Position({uuid, data, type, index, isLocked}) {
-  const ref = useRef(null);
-
   let text = data.name;
   if (type == 'top') {
     text += ' (верх)'
@@ -55,15 +53,18 @@ export default function Position({uuid, data, type, index, isLocked}) {
     })
   });
 
+  let dragDrop = (node) => {
+    drag(drop(node))
+  }
+
   if (data.type === 'bun') {
     isDrag = false;
-  } else {
-    drag(drop(ref))
+    dragDrop = null;
   }
 
   return (
     !isDrag && 
-      <div className={`${positionStyles.item} ml-4 mb-4`} ref={ref}>
+      <div className={`${positionStyles.item} ml-4 mb-4`} ref={dragDrop}>
         <div className={`${positionStyles.drag} mr-2` }>
           {!isLocked && <DragIcon type="primary" />}
         </div>
