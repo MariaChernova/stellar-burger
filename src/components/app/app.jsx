@@ -7,13 +7,11 @@ import BurgerConstructor from '../burger-constructor/burger-constructor.jsx';
 import Modal from '../modal/modal.jsx';
 import IngredientDetails from '../ingredient-details/ingredient-details.jsx';
 import OrderDetails from '../order-details/order-details.jsx';
-import { GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, GET_INGREDIENTS_FAIL } from '../../services/actions/actions';
+import { getIngredients } from '../../services/actions/actions';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
-import { checkResponse } from '../../utils/checkResponse'
 
 
-export const API_DOMEN = 'norma.nomoreparties.space';
 const MODAL_TYPE_INGREDIENTS = 'ingredients';
 const MODAL_TYPE_ORDER_DETAILS = 'order';
 
@@ -23,21 +21,6 @@ export default function App() {
   
 
   React.useEffect(() => {
-    const getIngredients = () => {
-      return async (dispatch0) => {
-        try {
-          dispatch0({type: GET_INGREDIENTS_REQUEST});
-          const res = await fetch(`https://${API_DOMEN}/api/ingredients`);
-          checkResponse(res);
-          const data = await res.json();
-          dispatch0({type: GET_INGREDIENTS_SUCCESS, ingredients: data.data});
-        } catch (error) {
-          dispatch0({type: GET_INGREDIENTS_FAIL});
-          console.log(`Error while trying data from server: ${error}`);
-        }
-      }
-    }
-
     dispatch(getIngredients());
   }, [])
 

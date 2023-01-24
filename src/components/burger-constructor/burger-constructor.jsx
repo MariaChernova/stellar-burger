@@ -1,15 +1,10 @@
 import Position from '../position/position.jsx';
 import burgerConstructorStyles from './burger-constructor.module.css';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { API_DOMEN } from '../app/app'
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
-import { checkResponse } from '../../utils/checkResponse';
 import {
-  OPEN_ORDER_MODAL,
-  MAKE_ORDER_REQUEST,
-  MAKE_ORDER_SUCCESS,
-  MAKE_ORDER_FAIL,
+  makeOrder,
   ADD_INGREDIENT,
   SET_BUN,
   MOVE_INGREDIENT
@@ -49,38 +44,8 @@ export default function BurgerConstructor () {
     })
   });
 
-  const makeOrder = () => {
-    return async (dispatch0) => {
-      try {
-        dispatch0({type: MAKE_ORDER_REQUEST});
-        const res = await fetch(`https://${API_DOMEN}/api/orders`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            ingredients: [bun, ...positions.map((element) => element.id), bun]
-          })
-        });
-        checkResponse(res);
-        const data = await res.json();
-
-        dispatch0({type: MAKE_ORDER_SUCCESS, orderId: data.order.number});
-
-        dispatch0({
-          type: OPEN_ORDER_MODAL,
-          id: data.order.number
-        });
-
-      } catch (error) {
-        dispatch0({type: MAKE_ORDER_FAIL});
-        console.log(`Error while trying data from server: ${error}`);
-      }
-    }
-  };
-
   const handleClick = () => {
-    dispatch(makeOrder())
+    dispatch(makeOrder(bun, positions))
   }
 
   const totalPrice = ingredients
