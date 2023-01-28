@@ -1,68 +1,78 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import Position from '../position/position.jsx';
 import burgerConstructorStyles from './burger-constructor.module.css';
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { AppContext } from '../../services/appContext';
-import { API_DOMEN } from '../app/app'
+import { useDispatch, useSelector } from 'react-redux';
+import { useDrop } from 'react-dnd';
+import {
+  makeOrder,
+  ADD_INGREDIENT,
+  SET_BUN,
+  MOVE_INGREDIENT
+} from '../../services/actions/actions';
+import { v4 as uuidv4 } from 'uuid';
 
+export default function BurgerConstructor () {
+  const dispatch = useDispatch();
+  const { ingredients, bun, positions }  = useSelector(store => ({
+    ingredients: store.ingredients.items,
+    bun: store.burgerConstructor.bun,
+    positions: store.burgerConstructor.positions
+  }));
 
-
-export default function BurgerConstructor (props) {
-
-  const {ingredients, constructor} = React.useContext(AppContext);
-  const {bun, positions} = constructor;
-
-  const {openOrderModal} = props;
-
-  const makeOrder = async () => {
-    try {
-      const url = `https://${API_DOMEN}/api/orders`;
-      const res = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          ingredients: [bun, ...positions, bun]
-        })
-      });
-      if (!res.ok) {
-        throw res.statusText;
+  const [{ isHover } , drop] = useDrop({
+    accept: "ingredient",
+    drop(item, monitor) {
+      if (monitor.didDrop())
+        return;
+      if (typeof item.from !== 'undefined') {
+        dispatch({
+          type: MOVE_INGREDIENT,
+          id: item.id,
+          from: item.from,
+          uuid: item.uuid
+        });
+      } else {
+        dispatch({
+          type: item.type === 'bun' ? SET_BUN : ADD_INGREDIENT,
+          id: item.id,
+          uuid: uuidv4()
+        });
       }
-      const data = await res.json();
-      openOrderModal(data.order.number);
-    } catch (error) {
-      console.log(`Error while trying data from server: ${error}`);
-    }
-  };
+    },
+    collect: monitor => ({
+      isHover: monitor.isOver(),
+    })
+  });
+
+  const handleClick = () => {
+    dispatch(makeOrder(bun, positions))
+  }
 
   const totalPrice = ingredients
-    ? positions.reduce((accumulator, item) => accumulator + ingredients.find(element => element._id === item).price, 0)
+    ? positions.reduce((accumulator, item) => accumulator + ingredients.find(element => element._id === item.id).price, 0)
+      + (bun ? ingredients.find(element => element._id === bun).price * 2 : 0)
     : 0;
+
+  const backgroundColor = isHover ? '#1F1F23' : 'transparent';
 
   return (
     <div className={burgerConstructorStyles.container}>
       {ingredients !== null &&
-        <div className={burgerConstructorStyles.positions}>
-          <Position key={0} type={'top'} isLocked={true} data={ingredients.find(element => element._id === bun)} />
+        <div className={burgerConstructorStyles.positions} ref={drop} style={{backgroundColor}}>
+          {bun && <Position key={0} type={'top'} isLocked={true} data={ingredients.find(element => element._id === bun)} />}
           <div className={burgerConstructorStyles.scrollPositions}>
-            {positions.map((id, index) => 
-              <Position key={index + 2} type={'undefined'} isLocked={false} data={ingredients.find(element => element._id === id)} />
+            {positions.map(({id, uuid}, index) => 
+              <Position key={ uuid } uuid={uuid} id={id} index={index} type={'undefined'} isLocked={false} data={ingredients.find(element => element._id === id)} />
             )}
           </div>
-          <Position key={1} type={'bottom'} isLocked={true} data={ingredients.find(element => element._id === bun)} />
+          {bun && <Position key={1} type={'bottom'} isLocked={true} data={ingredients.find(element => element._id === bun)} />}
         </div>
       }
       <div className={`${burgerConstructorStyles.sum} mt-5 mr-4`}>  
         <p className={'text text_type_main-large mr-2'}>{totalPrice}</p>
         <CurrencyIcon type="primary" />
-        <Button extraClass={'ml-10'} htmlType="button" type="primary" size="large" onClick={makeOrder}>Оформить заказ</Button>
+        <Button extraClass={'ml-10'} htmlType="button" type="primary" size="large" onClick={handleClick}>Оформить заказ</Button>
       </div>
     </div>
   )
-}
-
-BurgerConstructor.propTypes = {
-  openOrderModal: PropTypes.func.isRequired,
 }
