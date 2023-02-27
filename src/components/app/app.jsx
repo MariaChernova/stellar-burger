@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import appStyles from './app.module.css';
 import AppHeader from '../app-header/app-header.jsx';
+import SignIn from '../sign-in/sign-in.jsx';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients.jsx';
 import BurgerConstructor from '../burger-constructor/burger-constructor.jsx';
 import Modal from '../modal/modal.jsx';
@@ -27,7 +28,9 @@ export default function App() {
   return (
     <div className={appStyles.container}>
       <AppHeader  />
+      
       <main className={appStyles.main}>
+        {/* <SignIn /> */}
         <h1 className={`${appStyles.constructorTitle} text text_type_main-large mb-5`}>Соберите бургер</h1>
         <div className={appStyles.constructor} >
           <DndProvider backend={HTML5Backend}>
