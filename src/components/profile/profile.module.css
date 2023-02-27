@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+}
+
+.li {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.ul {
+  padding: 0;
+  margin: 0;
+}

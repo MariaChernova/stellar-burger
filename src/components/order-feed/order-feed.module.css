@@ -1,0 +1,17 @@
+.title {
+  align-self: start;;
+}
+
+.container {
+  display: flex;
+}
+
+.orders {
+  display: flex;
+  flex-direction: column;
+  width: 608px;
+}
+
+.stats {
+  width: 580px;
+}

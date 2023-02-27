@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  background-color: #1C1C21;
+  border-radius: 40px;
+  margin-bottom: 16px;
+}
+
+.ingredients {
+  display: flex;
+  align-items: center;
+}
+
+.orderId {
+  display: flex;
+  justify-content: space-between;
+}
+
+.image {
+  border-radius: 100%;
+  background-color: bisque;
+  width: 64px;
+  height: 64px;
+  margin-left: -16px;
+  border: 2px solid #fff;
+}
+
+.image:first-of-type {
+  margin-left: 0;
+}
+
+.images {
+  display: flex;
+  width: 436px;
+  margin-right: 24px;
+}
+
+.price {
+  display: flex;
+}
