@@ -10,6 +10,7 @@ import {
   MOVE_INGREDIENT
 } from '../../services/actions/actions';
 import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 
 export default function BurgerConstructor () {
   const dispatch = useDispatch();
@@ -55,6 +56,12 @@ export default function BurgerConstructor () {
 
   const backgroundColor = isHover ? '#1F1F23' : 'transparent';
 
+  const navigate = useNavigate();
+
+  const onClick = () => {
+    navigate('/login');
+  };
+
   return (
     <div className={burgerConstructorStyles.container}>
       {ingredients !== null &&
@@ -71,7 +78,7 @@ export default function BurgerConstructor () {
       <div className={`${burgerConstructorStyles.sum} mt-5 mr-4`}>  
         <p className={'text text_type_main-large mr-2'}>{totalPrice}</p>
         <CurrencyIcon type="primary" />
-        <Button extraClass={'ml-10'} htmlType="button" type="primary" size="large" onClick={handleClick}>Оформить заказ</Button>
+        <Button extraClass={'ml-10'} htmlType="button" type="primary" size="large" onClick={onClick}>Оформить заказ</Button>
       </div>
     </div>
   )

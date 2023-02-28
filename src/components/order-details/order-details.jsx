@@ -3,7 +3,7 @@ import doneImage from '../../images/done.svg';
 import PropTypes from 'prop-types';
 
 
-export default function OrdertDetails(props) {
+export default function OrderDetails(props) {
 
   return (
     <div className={orderDetailsStyles.container}>
@@ -16,6 +16,6 @@ export default function OrdertDetails(props) {
   )
 }
 
-OrdertDetails.propTypes = {
+OrderDetails.propTypes = {
   id: PropTypes.number.isRequired,
 }
