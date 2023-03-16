@@ -1,5 +1,5 @@
 import orderFeedStyles from './order-feed.module.css';
-import Order from '../order/order';
+import Order from '../../components/order/order';
 // import { EmailInput, PasswordInput, Input, Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 
 

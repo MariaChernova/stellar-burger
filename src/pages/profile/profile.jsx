@@ -1,5 +1,5 @@
 import profileStyles from './profile.module.css';
-import { EmailInput, PasswordInput, Input, Typography } from '@ya.praktikum/react-developer-burger-ui-components';
+import { PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
 export default function Profile() {
   return (

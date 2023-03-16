@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  margin: 80px auto 0;
 }
 
 .navigation {

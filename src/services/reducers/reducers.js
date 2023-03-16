@@ -155,3 +155,8 @@ export const order = (state = orderInitialState, action) => {
     }
   }
 }
+
+export const userInitialState = {
+  user: null
+}
+

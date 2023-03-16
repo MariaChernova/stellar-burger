@@ -1,12 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux';
 import appStyles from './app.module.css';
 import AppHeader from '../app-header/app-header.jsx';
-import SignIn from '../sign-in/sign-in.jsx';
-import Registration from '../registration/registration.jsx';
-import ForgotPassword from '../forgot-password/forgot-password';
-import ResetPassword from '../reset-password/reset-password';
-import Profile from '../profile/profile';
-import FullPage from '../full-page/full-page';
+import SignIn from '../../pages/sign-in/sign-in.jsx';
+import Registration from '../../pages/registration/registration.jsx';
+import ForgotPassword from '../../pages/forgot-password/forgot-password';
+import ResetPassword from '../../pages/reset-password/reset-password';
+import Profile from '../../pages/profile/profile';
+import FullPage from '../../pages/full-page/full-page';
 import { HomePage } from '../../pages/home/home';
 import {  Routes, Route } from 'react-router-dom';
 

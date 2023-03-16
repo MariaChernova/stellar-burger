@@ -18,6 +18,20 @@ export const MAKE_ORDER_REQUEST = 'MAKE_ORDER_REQUEST';
 export const MAKE_ORDER_SUCCESS = 'MAKE_ORDER_SUCCESS';
 export const MAKE_ORDER_FAIL = 'MAKE_ORDER_FAIL';
 
+export const RESET_PASSWORD_REQUEST = 'RESET_PASSWORD_REQUEST';
+export const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS';
+export const RESET_PASSWORD_FAIL = 'RESET_PASSWORD_FAIL';
+
+export const SAVE_PASSWORD_REQUEST = 'SAVE_PASSWORD_REQUEST';
+export const SAVE_PASSWORD_SUCCESS = 'SAVE_PASSWORD_SUCCESS';
+export const SAVE_PASSWORD_FAIL = 'SAVE_PASSWORD_FAIL';
+
+export const CREATE_USER_REQUEST = 'CREATE_USER_REQUEST';
+export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS';
+export const CREATE_USER_FAIL = 'CREATE_USER_FAIL';
+
+
+
 
 export const getIngredients = () => {
   return async (dispatch) => {
@@ -67,40 +81,96 @@ export const makeOrder = (bun, positions) => {
   }
 };
 
+export const resetPassword = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({type: RESET_PASSWORD_REQUEST});
+      const res = await fetch(`${BASE_URL}/password-reset`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: ""
+        })
+      });
+      checkResponse(res);
+      const data = await res.json();
 
-// export const getOrderInfo = (orderNumber) => {
-//   return function (dispatch) {
-//     dispatch(getOrderInfoLoading())
+      if (data.success) {
+        // TODO: перенаправить пользователя
+      }
+      dispatch({type: RESET_PASSWORD_SUCCESS, orderId: data.order.number});
 
-//     mainApi.getOrderInfo(orderNumber)
-//       .then(data => {
-//         if (data) {
-//           dispatch(getOrderInfoLoadingSuccess(data.orders[0]))
-//         }
-//       })
-//       .catch(() => dispatch(getOrderInfoLoadingFailed()))
-//   }
-// }
+      dispatch({
+        type: OPEN_ORDER_MODAL,
+        id: data.order.number
+      });
 
-// export const getIngredients = () => {
-//     dispatch({
-//       type: GET_INGREDIENTS,
-//     });
+    } catch (error) {
+      dispatch({type: MAKE_ORDER_FAIL});
+      console.log(`Error while trying data from server: ${error}`);
+    }
+  }
+};
 
-//     mainApi
-//       .getIngredients()
-//       .then((ingredientsData) => {
-//         if (ingredientsData) {
-//           dispatch({
-//             type: GET_INGREDIENTS_SUCCESS,
-//             payload: ingredientsData.data,
-//           });
-//         }
-//       })
-//       .catch(() =>
-//         dispatch({
-//           type: GET_INGREDIENTS_FAILED,
-//         })
-//       );
-//   };
-// }
+export const savePassword = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({type: SAVE_PASSWORD_REQUEST});
+      const res = await fetch(`${BASE_URL}/password-reset/reset`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          emapassword: "",
+          token: ""
+        })
+      });
+      checkResponse(res);
+      const data = await res.json();
+
+
+      dispatch({type: SAVE_PASSWORD_SUCCESS});
+
+      dispatch({
+        type: OPEN_ORDER_MODAL,
+        id: data.order.number
+      });
+
+    } catch (error) {
+      dispatch({type: SAVE_PASSWORD_FAIL});
+      console.log(`Error while trying data from server: ${error}`);
+    }
+  }
+};
+
+export const createUser = (name, email, password) => {
+  return async (dispatch) => {
+    try {
+      dispatch({type: CREATE_USER_REQUEST});
+      const res = await fetch(`${BASE_URL}/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email, password, name
+        })
+      });
+      checkResponse(res);
+      const data = await res.json();
+
+      if (data.success) {
+        // TODO: перенаправить пользователя
+      }
+
+      dispatch({type: CREATE_USER_SUCCESS});
+
+    } catch (error) {
+      dispatch({type: CREATE_USER_FAIL});
+      console.log(`Error while trying data from server: ${error}`);
+    }
+  }
+}
