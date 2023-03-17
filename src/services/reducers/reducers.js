@@ -11,7 +11,13 @@ import {
   CLOSE_MODAL,
   MAKE_ORDER_REQUEST,
   MAKE_ORDER_SUCCESS,
-  MAKE_ORDER_FAIL
+  MAKE_ORDER_FAIL,
+  CREATE_USER_REQUEST,
+  CREATE_USER_SUCCESS,
+  CREATE_USER_FAIL,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL
 } from '../actions/actions';
 
 const MODAL_TYPE_INGREDIENTS = 'ingredients';
@@ -157,6 +163,73 @@ export const order = (state = orderInitialState, action) => {
 }
 
 export const userInitialState = {
-  user: null
+  user: null,
+  registrationRequest: false,
+  registrationFailed: false
 }
 
+export const user = (state = userInitialState, action) => {
+  switch (action.type) {
+    case CREATE_USER_REQUEST: {
+      return {
+        ...state,
+        registrationRequest: true
+      };
+    }
+    case CREATE_USER_SUCCESS: {
+      return {
+        ...state,
+        registrationRequest: false,
+        user: action.user,
+        accessToken: action.accessToken,
+        refreshToken: action.refreshToken
+      };
+    }
+    case CREATE_USER_FAIL: {
+      return {
+        ...state,
+        registrationRequest: false,
+        registrationFailed: true
+      };
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
+export const loginInitialState = {
+  user: null,
+  loginRequest: false,
+  loginFailed: false
+}
+
+export const login = (state = userInitialState, action) => {
+  switch (action.type) {
+    case LOGIN_REQUEST: {
+      return {
+        ...state,
+        loginRequest: true
+      };
+    }
+    case LOGIN_SUCCESS: {
+      return {
+        ...state,
+        loginRequest: false,
+        user: action.user,
+        accessToken: action.accessToken,
+        refreshToken: action.refreshToken
+      };
+    }
+    case LOGIN_FAIL: {
+      return {
+        ...state,
+        loginRequest: false,
+        loginFailed: true
+      };
+    }
+    default: {
+      return state;
+    }
+  }
+}

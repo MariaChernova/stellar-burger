@@ -30,6 +30,10 @@ export const CREATE_USER_REQUEST = 'CREATE_USER_REQUEST';
 export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS';
 export const CREATE_USER_FAIL = 'CREATE_USER_FAIL';
 
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
+
 
 
 
@@ -39,9 +43,7 @@ export const getIngredients = () => {
       dispatch({type: GET_INGREDIENTS_REQUEST});
       
       const res = await fetch(`${BASE_URL}/ingredients`);
-      checkResponse(res);
-
-      const data = await res.json();
+      const data = await checkResponse(res);
       dispatch({type: GET_INGREDIENTS_SUCCESS, ingredients: data.data});
 
     } catch (error) {
@@ -64,8 +66,7 @@ export const makeOrder = (bun, positions) => {
           ingredients: [bun, ...positions.map((element) => element.id), bun]
         })
       });
-      checkResponse(res);
-      const data = await res.json();
+      const data = await checkResponse(res);
 
       dispatch({type: MAKE_ORDER_SUCCESS, orderId: data.order.number});
 
@@ -94,12 +95,9 @@ export const resetPassword = () => {
           email: ""
         })
       });
-      checkResponse(res);
-      const data = await res.json();
+      const data = await checkResponse(res);
 
-      if (data.success) {
-        // TODO: перенаправить пользователя
-      }
+      // TODO: перенаправить пользователя
       dispatch({type: RESET_PASSWORD_SUCCESS, orderId: data.order.number});
 
       dispatch({
@@ -128,9 +126,7 @@ export const savePassword = () => {
           token: ""
         })
       });
-      checkResponse(res);
-      const data = await res.json();
-
+      const data = await checkResponse(res);
 
       dispatch({type: SAVE_PASSWORD_SUCCESS});
 
@@ -159,18 +155,47 @@ export const createUser = (name, email, password) => {
           email, password, name
         })
       });
-      checkResponse(res);
-      const data = await res.json();
-
-      if (data.success) {
-        // TODO: перенаправить пользователя
-      }
-
-      dispatch({type: CREATE_USER_SUCCESS});
+      const data = await checkResponse(res);
+      console.log(data);
+      dispatch({
+        type: CREATE_USER_SUCCESS,
+        user: data.user,
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken
+      });
 
     } catch (error) {
       dispatch({type: CREATE_USER_FAIL});
-      console.log(`Error while trying data from server: ${error}`);
+      console.log(`Error while getting data from server: ${error}`);
+    }
+  }
+}
+
+export const login = (email, password) => {
+  return async (dispatch) => {
+    try {
+      dispatch({type: LOGIN_REQUEST});
+      const res = await fetch(`${BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email, password
+        })
+      });
+      const data = await checkResponse(res);
+      console.log(data);
+      dispatch({
+        type: LOGIN_SUCCESS,
+        user: data.user,
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken
+      });
+
+    } catch (error) {
+      dispatch({type: LOGIN_FAIL});
+      console.log(`Error while getting data from server: ${error}`);
     }
   }
 }

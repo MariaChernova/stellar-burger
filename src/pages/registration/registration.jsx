@@ -3,9 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { EmailInput, PasswordInput, Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { createUser } from '../../services/actions/actions';
 import React from 'react';
+import { useDispatch } from 'react-redux';
+
 
 
 export default function Registration() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const goToSignIn = () => {
@@ -28,8 +31,10 @@ export default function Registration() {
     setName(e.target.value)
   }
 
-  const onFormSubmit = () => {
-    createUser(name, email, password)
+  const onFormSubmit = (event) => {
+    event.preventDefault();
+    dispatch(createUser(name, email, password));
+    navigate('/login');
   }
 
   return (
